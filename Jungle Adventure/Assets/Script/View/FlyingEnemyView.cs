@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GroundEnemyView : MonoBehaviour
+public class FlyingEnemyView : MonoBehaviour
 {
     [SerializeField] private Transform firstBorder, secondBorder;
     [SerializeField] private Transform startPos;
-    private bool groundEnemy = true;
-    public event UnityAction<bool> MoveGroundEnemy;
+    private bool flyingEnemy = true;
+    public event UnityAction<bool> MoveFlyingEnemy;
 
     Vector3 nextPos;
 
@@ -18,9 +18,9 @@ public class GroundEnemyView : MonoBehaviour
     }
     void Update()
     {
-        MoveGroundEnemy?.Invoke(groundEnemy);
+        MoveFlyingEnemy?.Invoke(flyingEnemy);
     }
-    
+
     public void MoveEnemyPosition(float speed)
     {
         transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
@@ -38,5 +38,4 @@ public class GroundEnemyView : MonoBehaviour
             transform.localScale = Scaler;
         }
     }
-
 }

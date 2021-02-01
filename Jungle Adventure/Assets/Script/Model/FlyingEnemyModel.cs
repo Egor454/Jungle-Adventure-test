@@ -1,9 +1,8 @@
-﻿using UnityEditor;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
-public class EnemyModel
+public class FlyingEnemyModel 
 {
-    private float speed = 1f;
+    private float speed = 3f;
     public event UnityAction<float> ChangedEnemyPositionModel;
 
     public void ChangePositionEnemy(bool enemy)
@@ -14,7 +13,4 @@ public class EnemyModel
         }
 
     }
-
-
 }
-    
