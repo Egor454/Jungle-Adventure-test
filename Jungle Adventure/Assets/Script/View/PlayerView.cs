@@ -96,4 +96,20 @@ public class PlayerView : MonoBehaviour
         transform.localScale = Scaler;
         
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    int b = 3;
+    //}
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            print(other.gameObject.name);
+        }
+        if (other.gameObject.tag == "DamagePlatform")
+        {
+            print(other.gameObject.name);
+        }
+    }
 }
