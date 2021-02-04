@@ -11,23 +11,27 @@ public class PlayerView : MonoBehaviour
     private bool facingRight = true;
 
     public event UnityAction <float> ChangedPosition;
+    public event UnityAction GetDamage;
+    public event UnityAction GetHelthPlayer;
 
     private bool isGrounded;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask whatIsGround;
     private int extraJump;
+    private int helthPlayer;
     [SerializeField] private int extraJumpValue;
     [SerializeField] private Animator anim;
     void Start()
     {
         extraJump = extraJumpValue;
         rb = GetComponent<Rigidbody2D>();
-        
+
     }
 
     private void FixedUpdate()
     {
+        //GetHelthPlayer?.Invoke();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         anim.SetBool("Ground", isGrounded);
         anim.SetFloat("vSpeed", rb.velocity.y);
@@ -97,19 +101,20 @@ public class PlayerView : MonoBehaviour
         
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    int b = 3;
-    //}
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "Enemy")
         {
-            print(other.gameObject.name);
+            GetDamage?.Invoke();
         }
         if (other.gameObject.tag == "DamagePlatform")
         {
-            print(other.gameObject.name);
+            GetDamage?.Invoke();
         }
+    }
+    public  void GetHealth(int health)
+    {
+        helthPlayer = health;
+        print(helthPlayer);
     }
 }

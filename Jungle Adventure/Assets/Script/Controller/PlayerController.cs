@@ -9,16 +9,34 @@ public class PlayerController
     {
         this.playerView = view;
         this.playerModel = model;
+        playerView.GetHelthPlayer += GetHealthModel;
+        playerModel.SetHealth += GetHealthView;
 
-        playerView.ChangedPosition += ChangePosition;
+        playerView.ChangedPosition += ChangePositionModel;
         playerModel.ChangedPositionModel += ChangePositionView;
+        playerView.GetDamage += ChangeHealthModel;
+        playerModel.GetHealth += GetHealthView;
     }
-    private void ChangePosition(float moveInput)
+    private void GetHealthModel()
+    {
+        playerModel.GetHealthModel();
+    }
+
+    private void ChangePositionModel(float moveInput)
     {
         playerModel.ChangePosition(moveInput);
     }
     private void ChangePositionView(float playerMove)
     {
         playerView.ChangePositionView(playerMove);
+    }
+    private void ChangeHealthModel()
+    {
+        playerModel.ChangeHealth();
+
+    }
+    private void GetHealthView(int health)
+    {
+        playerView.GetHealth(health);
     }
 }
