@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject[] groundEnemyPrefab;
     [SerializeField] private GameObject[] flyingEnemyPrefab;
+    [SerializeField] private Image image;
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
@@ -19,6 +21,7 @@ public class GameController : MonoBehaviour
         groundEnemyModel = new GroundEnemyModel();
         playerModel = new PlayerModel();
         flyingEnemyModel = new FlyingEnemyModel();
+        image.color = new Color(0.12f, 0.6f, 0.35f, 1f);
 
         var playerView = playerPrefab.GetComponent<PlayerView>();
 
