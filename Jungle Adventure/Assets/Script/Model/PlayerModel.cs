@@ -8,12 +8,9 @@ public class PlayerModel
     private  float horizontalSpeed = 0.1f;
     public  event UnityAction <float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
-    public event UnityAction<int> SetHealth;
 
-    public void GetHealthModel()
-    {
-        SetHealth?.Invoke(health);
-    }
+
+
     public void ChangePosition(float moveInput)
     {
         if(moveInput == 1)
@@ -33,4 +30,10 @@ public class PlayerModel
         GetHealth?.Invoke(health);
 
     }
+    public void Death()
+    {
+        health = 0;
+        GetHealth?.Invoke(health);
+    }
+        
 }

@@ -1,40 +1,57 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PlayerView : MonoBehaviour
 {
-    private float moveInput = 0;
     [SerializeField] private float jumpForce;
-    private Rigidbody2D rb;
-
-    private bool facingRight = true;
-
-    public event UnityAction <float> ChangedPosition;
-    public event UnityAction GetDamage;
-    public event UnityAction GetHelthPlayer;
-
-    private bool isGrounded;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask whatIsGround;
-    private int extraJump;
-    private int helthPlayer;
     [SerializeField] private int extraJumpValue;
     [SerializeField] private Animator anim;
+
+    private Rigidbody2D rb;
+    private BoxCollider2D boxC;
+    private SpriteRenderer sprite;
+    GameController game;
+
+    private float timeLeft = 2f;
+    private bool invulnerability = false;
+
+    public event UnityAction <float> ChangedPosition;
+    public event UnityAction GetDamage;
+    public event UnityAction DeathPlayer;
+
+    private bool isGrounded;
+    private int extraJump;
+    private float moveInput = 0;
+    private bool facingRight = true;
+
+    private int helthPlayer;
+
     void Start()
     {
         extraJump = extraJumpValue;
         rb = GetComponent<Rigidbody2D>();
-
+        boxC = GetComponent<BoxCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
+ 
     }
-
+    public void Iniinitialization(GameController game)
+    {
+        this.game = game;
+    }
     private void FixedUpdate()
     {
-        //GetHelthPlayer?.Invoke();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         anim.SetBool("Ground", isGrounded);
         anim.SetFloat("vSpeed", rb.velocity.y);
+        if (invulnerability)
+        {
+            InvulnerabilityTimer();
+        }
         if (Input.GetKey(KeyCode.RightArrow) || (Input.GetKey(KeyCode.LeftArrow)))
         {
             anim.SetBool("isRunning", true);
@@ -64,6 +81,7 @@ public class PlayerView : MonoBehaviour
     }
     private void Update()
     {
+
         if (isGrounded == true)
         {
             extraJump = extraJumpValue;
@@ -111,10 +129,43 @@ public class PlayerView : MonoBehaviour
         {
             GetDamage?.Invoke();
         }
+        if (other.gameObject.tag == "Death")
+        {
+            DeathPlayer?.Invoke();
+        }
     }
     public  void GetHealth(int health)
     {
         helthPlayer = health;
-        print(helthPlayer);
+        game.ChangeHp(helthPlayer);
+        EnableInvulnerability();
+        if (helthPlayer == 0)
+        {
+            Death();
+        }
     }
+    public void Death()
+    {
+        game.DeathPlayer();
+    }
+
+    public void EnableInvulnerability()
+    {
+        gameObject.layer = 10;
+        sprite.color = new Color(1f, 1f, 1f, 0.5f);
+        invulnerability = true;
+    }
+    public void  InvulnerabilityTimer()
+    {
+        timeLeft -= Time.deltaTime;
+        if (timeLeft < 0)
+        {
+            invulnerability = false;
+            gameObject.layer = 0;
+            sprite.color = new Color(1f, 1f, 1f, 1f);
+            timeLeft = 2f;
+        }
+
+    }
+
 }

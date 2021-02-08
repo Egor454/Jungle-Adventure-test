@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4888496757670990770}
   - component: {fileID: 131476901183491418}
   - component: {fileID: 1640562376693887603}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Octopus_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

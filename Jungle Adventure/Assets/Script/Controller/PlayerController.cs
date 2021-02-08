@@ -9,19 +9,19 @@ public class PlayerController
     {
         this.playerView = view;
         this.playerModel = model;
-        playerView.GetHelthPlayer += GetHealthModel;
-        playerModel.SetHealth += GetHealthView;
+
+        playerView.DeathPlayer += DeathPlayerModel;
 
         playerView.ChangedPosition += ChangePositionModel;
         playerModel.ChangedPositionModel += ChangePositionView;
         playerView.GetDamage += ChangeHealthModel;
         playerModel.GetHealth += GetHealthView;
     }
-    private void GetHealthModel()
-    {
-        playerModel.GetHealthModel();
-    }
 
+    private void DeathPlayerModel()
+    {
+        playerModel.Death();
+    }
     private void ChangePositionModel(float moveInput)
     {
         playerModel.ChangePosition(moveInput);
