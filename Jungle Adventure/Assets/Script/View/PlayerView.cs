@@ -103,7 +103,7 @@ public class PlayerView : MonoBehaviour
         transform.Translate(playerMove, 0, 0);
     }
 
-   public void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3  Scaler = transform.localScale;
@@ -134,6 +134,17 @@ public class PlayerView : MonoBehaviour
             DeathPlayer?.Invoke();
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Coin")
+        {
+            game.СollectingСoins(collision);
+        }
+        if (collision.gameObject.tag == "Chest")
+        {
+            game.СollectingСoins(collision);
+        }
+    }
     public  void GetHealth(int health)
     {
         helthPlayer = health;
@@ -144,7 +155,7 @@ public class PlayerView : MonoBehaviour
             Death();
         }
     }
-    public void Death()
+    private void Death()
     {
         game.DeathPlayer();
     }
@@ -155,7 +166,7 @@ public class PlayerView : MonoBehaviour
         sprite.color = new Color(1f, 1f, 1f, 0.5f);
         invulnerability = true;
     }
-    public void  InvulnerabilityTimer()
+    private void  InvulnerabilityTimer()
     {
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)

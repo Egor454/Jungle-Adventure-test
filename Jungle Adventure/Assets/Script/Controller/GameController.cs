@@ -9,15 +9,18 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject[] groundEnemyPrefab;
     [SerializeField] private GameObject[] flyingEnemyPrefab;
+
     [SerializeField] private Image heart1;
     [SerializeField] private Image heart2;
     [SerializeField] private Image heart3;
+
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
     private GroundEnemyController groundenemyController;
     private FlyingEnemyModel flyingEnemyModel;
     private FlyingEnemyController FlyingEnemyController;
+    private int coin;
 
     public void Start()
     {
@@ -60,7 +63,18 @@ public class GameController : MonoBehaviour
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }   
-        
+    }
+    public void СollectingСoins(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject, 0.1f);
+            coin++;
+        }
+        if (collision.gameObject.tag == "Chest")
+        {
+            coin += 5;
+        }
 
+    }
 }

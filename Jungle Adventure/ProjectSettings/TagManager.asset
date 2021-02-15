@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - DamagePlatform
   - Death
+  - Coin
+  - Chest
   layers:
   - Default
   - TransparentFX
