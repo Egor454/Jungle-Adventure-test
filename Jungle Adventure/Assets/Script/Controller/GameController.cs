@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Image heart2;
     [SerializeField] private Image heart3;
 
+    [SerializeField] private Text amountCoin_text;
+
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
@@ -41,6 +43,10 @@ public class GameController : MonoBehaviour
         }
         playerController = new PlayerController(playerView, playerModel);
         playerView.Iniinitialization(this);
+    }
+    private void Update()
+    {
+        amountCoin_text.text = coin.ToString();
     }
     public void ChangeHp(int hp)
     {
