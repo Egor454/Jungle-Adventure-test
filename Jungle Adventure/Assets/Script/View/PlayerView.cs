@@ -23,8 +23,10 @@ public class PlayerView : MonoBehaviour
     public event UnityAction <float> ChangedPosition;
     public event UnityAction GetDamage;
     public event UnityAction DeathPlayer;
+    public event UnityAction  HealPlayer;
 
     private bool isGrounded;
+    private bool needHeal = false;
     private int extraJump;
     private float moveInput = 0;
     private bool facingRight = true;
@@ -144,10 +146,18 @@ public class PlayerView : MonoBehaviour
         {
             game.СollectingСoins(collision);
         }
+        if (collision.gameObject.tag == "HealthPotion")
+        {
+            if(helthPlayer < 3 && helthPlayer != 0)
+            {
+                HealPlayer?.Invoke();
+                game.DestroyHealthPotion(collision);
+            }
+        }
     }
-    public  void GetHealth(int health)
+    public  void GetHealth(int hp)
     {
-        helthPlayer = health;
+        helthPlayer = hp;
         game.ChangeHp(helthPlayer);
         EnableInvulnerability();
         if (helthPlayer == 0)
@@ -178,5 +188,9 @@ public class PlayerView : MonoBehaviour
         }
 
     }
-
+    public void UpdateHealth(int hp)
+    {
+        helthPlayer = hp;
+        game.ChangeHeartOnScreen(helthPlayer);
+    }
 }

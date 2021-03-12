@@ -8,6 +8,7 @@ public class PlayerModel
     private  float horizontalSpeed = 0.1f;
     public  event UnityAction <float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
+    public event UnityAction<int> UpgradeTheAmountOfHealth;
 
 
 
@@ -35,5 +36,13 @@ public class PlayerModel
         health = 0;
         GetHealth?.Invoke(health);
     }
-        
+    public void GetHealthPotion()
+    {
+        if (health < 3)
+        {
+            health++;
+            UpgradeTheAmountOfHealth?.Invoke(health);
+        }
+
+    }
 }

@@ -14,8 +14,12 @@ public class PlayerController
 
         playerView.ChangedPosition += ChangePositionModel;
         playerModel.ChangedPositionModel += ChangePositionView;
+
         playerView.GetDamage += ChangeHealthModel;
         playerModel.GetHealth += GetHealthView;
+
+        playerView.HealPlayer += HealPlayerModel;
+        playerModel.UpgradeTheAmountOfHealth += UpgradeTheAmountOfHealthView;
     }
 
     private void DeathPlayerModel()
@@ -33,10 +37,17 @@ public class PlayerController
     private void ChangeHealthModel()
     {
         playerModel.ChangeHealth();
-
     }
-    private void GetHealthView(int health)
+    private void GetHealthView(int hp)
     {
-        playerView.GetHealth(health);
+        playerView.GetHealth(hp);
+    }
+    private void HealPlayerModel()
+    {
+         playerModel.GetHealthPotion();
+    }
+    private void UpgradeTheAmountOfHealthView(int hp)
+    {
+        playerView.UpdateHealth(hp);
     }
 }

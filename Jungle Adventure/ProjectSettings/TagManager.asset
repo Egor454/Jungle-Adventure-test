@@ -10,6 +10,7 @@ TagManager:
   - Death
   - Coin
   - Chest
+  - HealthPotion
   layers:
   - Default
   - TransparentFX

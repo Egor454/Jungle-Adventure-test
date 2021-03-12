@@ -63,7 +63,22 @@ public class GameController : MonoBehaviour
             heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         }
     }
-     public void DeathPlayer()
+    public void ChangeHeartOnScreen(int hp)
+    {
+        if( hp == 3)
+        {
+            heart1.color = new Color(1f, 1f, 1f, 1f);
+        }
+        if (hp == 2)
+        {
+            heart2.color = new Color(1f, 1f, 1f, 1f);
+        }
+    }
+    public void DestroyHealthPotion(Collider2D collision)
+    {
+        Destroy(collision.gameObject, 0.1f);
+    }
+    public void DeathPlayer()
     {
         heart1.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
