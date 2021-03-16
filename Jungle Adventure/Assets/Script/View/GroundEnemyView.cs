@@ -18,24 +18,29 @@ public class GroundEnemyView : MonoBehaviour
     }
     void Update()
     {
+
         MoveGroundEnemy?.Invoke(groundEnemy);
     }
-    
+
     public void MoveEnemyPosition(float speed)
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
-        Vector3 Scaler = transform.localScale;
-        if (transform.position.x == firstBorder.position.x)
+        if(this != null)
         {
-            nextPos = secondBorder.position;
-            Scaler.x = -7;
-            transform.localScale = Scaler;
-        }
-        if (transform.position.x == secondBorder.position.x)
-        {
-            nextPos = firstBorder.position;
-            Scaler.x = 7;
-            transform.localScale = Scaler;
+            transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+            Vector3 Scaler = transform.localScale;
+            if (transform.position.x == firstBorder.position.x)
+            {
+                nextPos = secondBorder.position;
+                Scaler.x = -7;
+                transform.localScale = Scaler;
+            }
+            if (transform.position.x == secondBorder.position.x)
+            {
+                nextPos = firstBorder.position;
+                Scaler.x = 7;
+                transform.localScale = Scaler;
+            }
+
         }
     }
 

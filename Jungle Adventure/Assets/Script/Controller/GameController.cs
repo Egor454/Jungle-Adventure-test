@@ -26,18 +26,17 @@ public class GameController : MonoBehaviour
 
     public void Start()
     {
-        groundEnemyModel = new GroundEnemyModel();
         playerModel = new PlayerModel();
-        flyingEnemyModel = new FlyingEnemyModel();
 
         var playerView = playerPrefab.GetComponent<PlayerView>();
-
-        foreach(GameObject objet in groundEnemyPrefab){
+        foreach (GameObject objet in groundEnemyPrefab){
+            groundEnemyModel = new GroundEnemyModel();
             var groundEnemyView = objet.GetComponent<GroundEnemyView>();
             groundenemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel);
         }
         foreach (GameObject objet in flyingEnemyPrefab)
         {
+            flyingEnemyModel = new FlyingEnemyModel();
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
             FlyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel);
         }
@@ -97,5 +96,11 @@ public class GameController : MonoBehaviour
             coin += 5;
         }
 
+    }
+    public void KillTheEnemy(Collision2D collision)
+    {
+        GameObject enemy = collision.transform.parent.gameObject;
+        //enemy.SetActive(false);
+        Destroy(enemy, 0.1f);
     }
 }

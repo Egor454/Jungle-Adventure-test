@@ -7,8 +7,10 @@ public class PlayerView : MonoBehaviour
 {
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform enemyCheck;
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask itIsEnemy;
     [SerializeField] private int extraJumpValue;
     [SerializeField] private Animator anim;
 
@@ -26,6 +28,7 @@ public class PlayerView : MonoBehaviour
     public event UnityAction  HealPlayer;
 
     private bool isGrounded;
+    private bool isEnemy;
     private bool needHeal = false;
     private int extraJump;
     private float moveInput = 0;
@@ -48,7 +51,9 @@ public class PlayerView : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        isEnemy = Physics2D.OverlapCircle(enemyCheck.position, checkRadius, itIsEnemy);
         anim.SetBool("Ground", isGrounded);
+        anim.SetBool("Enemy", isEnemy);
         anim.SetFloat("vSpeed", rb.velocity.y);
         if (invulnerability)
         {
@@ -125,6 +130,11 @@ public class PlayerView : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
+            if (isEnemy)
+            {
+                game.KillTheEnemy(other);
+                return;
+            }
             GetDamage?.Invoke();
         }
         if (other.gameObject.tag == "DamagePlatform")
