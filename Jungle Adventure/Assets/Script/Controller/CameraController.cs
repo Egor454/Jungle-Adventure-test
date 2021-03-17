@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private float dumping = 1f;
-    private Vector2 offset = new Vector2(2f, 1f);
+    private Vector2 offset = new Vector2(2f, 0f);
     private bool isLeft;
      private Transform player;
     private int lastX;

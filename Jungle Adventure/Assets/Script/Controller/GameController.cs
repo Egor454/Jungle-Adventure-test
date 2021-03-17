@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Image heart3;
 
     [SerializeField] private Text amountCoin_text;
+    [SerializeField] private Text amountScore_text;
 
     private PlayerController playerController;
     private PlayerModel playerModel;
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
     private FlyingEnemyModel flyingEnemyModel;
     private FlyingEnemyController FlyingEnemyController;
     private int coin;
+    private int score;
 
     public void Start()
     {
@@ -46,6 +48,7 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         amountCoin_text.text = coin.ToString();
+        amountScore_text.text = score.ToString();
     }
     public void ChangeHp(int hp)
     {
@@ -100,6 +103,13 @@ public class GameController : MonoBehaviour
     public void KillTheEnemy(Collision2D collision)
     {
         GameObject enemy = collision.transform.parent.gameObject;
+        if(collision.gameObject.name == "Crab_Enemy")
+        {
+            score += 100;
+        }else if(collision.gameObject.name == "Octopus_Enemy")
+        {
+            score += 200;
+        }
         //enemy.SetActive(false);
         Destroy(enemy, 0.1f);
     }
