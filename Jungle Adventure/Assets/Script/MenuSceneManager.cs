@@ -5,8 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MenuSceneManager : MonoBehaviour
 {
-   public void LevelSelection()
-   {
-        SceneManager.LoadScene("LevelSelection");
+    [SerializeField] private GameObject Menu;
+    [SerializeField] private GameObject LevelSelection;
+
+    public void ClickLevelSelection()
+    {
+        LevelSelection.SetActive(true);
+        Menu.SetActive(false);
+
+    }
+    public void ClickBackMenu()
+    {
+        LevelSelection.SetActive(false);
+        Menu.SetActive(true);
     }
 }
