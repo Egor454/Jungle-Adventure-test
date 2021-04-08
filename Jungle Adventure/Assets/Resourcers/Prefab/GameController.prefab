@@ -43,7 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6f4ef6a538b70419686ce55c55d8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7616067620166864506, guid: f324137d842e450498154ff4f1aee075,
-    type: 3}
-  groundEnemyPrefab: {fileID: 8701215357309194259, guid: cc90c34083c3064469959de4df715ae5,
-    type: 3}
+  playerPrefab: {fileID: 0}
+  groundEnemyPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  flyingEnemyPrefab:
+  - {fileID: 0}
+  heart1: {fileID: 0}
+  heart2: {fileID: 0}
+  heart3: {fileID: 0}
+  amountCoin_text: {fileID: 0}
+  amountScore_text: {fileID: 0}

@@ -8,7 +8,7 @@ public class DbManager : MonoBehaviour
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
     public string level_name;
     public string comlited;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(Send());

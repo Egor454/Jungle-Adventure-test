@@ -19,4 +19,8 @@ public class MenuSceneManager : MonoBehaviour
         LevelSelection.SetActive(false);
         Menu.SetActive(true);
     }
+    public void LoadedLevel1()
+    {
+        SceneManager.LoadScene("Level1");
+    }
 }
