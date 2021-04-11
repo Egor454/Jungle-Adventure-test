@@ -56,3 +56,6 @@ MonoBehaviour:
   heart3: {fileID: 0}
   amountCoin_text: {fileID: 0}
   amountScore_text: {fileID: 0}
+  camera: {fileID: 0}
+  UiGame: {fileID: 0}
+  MassageBoxGameOver: {fileID: 0}

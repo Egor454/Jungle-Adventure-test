@@ -17,6 +17,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text amountCoin_text;
     [SerializeField] private Text amountScore_text;
 
+    [SerializeField] private Camera camera;
+
+    [SerializeField] private GameObject UiGame;
+    [SerializeField] private GameObject MassageBoxGameOver;
+
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
@@ -85,7 +90,8 @@ public class GameController : MonoBehaviour
         heart1.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Destroy(playerPrefab, 0.1f);
+        GameOver();
     }
     public void СollectingСoins(Collider2D collision)
     {
@@ -112,5 +118,19 @@ public class GameController : MonoBehaviour
         }
         //enemy.SetActive(false);
         Destroy(enemy, 0.1f);
+    }
+    public void GameOver()
+    {
+        camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
+        UiGame.SetActive(false);
+        MassageBoxGameOver.SetActive(true);
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void BackMainScreen()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

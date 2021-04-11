@@ -11,7 +11,7 @@ public class DbManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Send());
+        //StartCoroutine(Send());
     }
 
     private IEnumerator Send()
