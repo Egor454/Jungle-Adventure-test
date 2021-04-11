@@ -109,10 +109,10 @@ public class GameController : MonoBehaviour
     public void KillTheEnemy(Collision2D collision)
     {
         GameObject enemy = collision.transform.parent.gameObject;
-        if(collision.gameObject.name == "Crab_Enemy")
+        if(collision.gameObject.name == "Crab_Enemy" || collision.gameObject.name == "Thing_Enemy")
         {
             score += 100;
-        }else if(collision.gameObject.name == "Octopus_Enemy")
+        }else if(collision.gameObject.name == "Octopus_Enemy" || collision.gameObject.name == "Ghost_Enemy")
         {
             score += 200;
         }
