@@ -12,7 +12,7 @@ public class MenuSceneManager : MonoBehaviour
 
     [SerializeField] private Image[] LevelGame;
 
-
+    int i;
     void Start()
     {
         GetComplitedLevel();
@@ -21,14 +21,19 @@ public class MenuSceneManager : MonoBehaviour
     {
         LevelSelection.SetActive(true);
         Menu.SetActive(false);
-        for (int i = 1; i < DbManager.Instance.Level.Count; i++)
+        for (i = 1; i < DbManager.Instance.Level.Count; i++)
         {
             if (DbManager.Instance.Level[i] == "1")
             {
                 LevelGame[i].GetComponent<Image>().sprite = (Sprite)Resources.Load("Image/MenuImage/MenuLevel" + (i + 1), typeof(Sprite));
                 LevelGame[i].GetComponent<Button>().interactable = true;
+            } 
+            if(i == 4)
+            {
+                DbManager.Instance.ClearData();
             }
         }
+        i = 0;
     }
     public void ClickBackMenu()
     {

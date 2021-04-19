@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 7100754603911860930}
   - component: {fileID: 1443680412938790787}
   m_Layer: 5
-  m_Name: RestartButton (1)
+  m_Name: NextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: RestartLevel
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 3269275602773849168}
   - component: {fileID: 8017989708944334518}
   m_Layer: 5
-  m_Name: Cash_value
+  m_Name: CashEndLevel_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1061,7 +1061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3859052814847832372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1122,7 +1122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.14996338, y: 2}
+  m_AnchoredPosition: {x: -0.15002441, y: 2}
   m_SizeDelta: {x: 0.30004883, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1718044867076281542
@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 1242753331548055470}
   - component: {fileID: 8205161649135134697}
   m_Layer: 5
-  m_Name: Score_value
+  m_Name: ScoreDie_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1596,7 +1596,7 @@ GameObject:
   - component: {fileID: 6311025943579704663}
   - component: {fileID: 599611244633318235}
   m_Layer: 5
-  m_Name: Cash_value
+  m_Name: CashDie_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 8856448805907403778}
   - component: {fileID: 4812246702889674329}
   m_Layer: 5
-  m_Name: Time_value
+  m_Name: TimeEndLevel_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1866,7 +1866,7 @@ GameObject:
   - component: {fileID: 1447735543908908040}
   - component: {fileID: 992591367372582697}
   m_Layer: 5
-  m_Name: Time_value
+  m_Name: TimeDie_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2697,7 +2697,7 @@ GameObject:
   - component: {fileID: 3988966915095272186}
   - component: {fileID: 8768629071533858539}
   m_Layer: 5
-  m_Name: Score_value
+  m_Name: ScoreEndLevel_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

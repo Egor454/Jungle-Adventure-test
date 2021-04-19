@@ -156,6 +156,10 @@ public class PlayerView : MonoBehaviour
         {
             game.СollectingСoins(collision);
         }
+        if (collision.gameObject.tag == "Portal")
+        {
+            game.LevelComplited();
+        }
         if (collision.gameObject.tag == "HealthPotion")
         {
             if(helthPlayer < 3 && helthPlayer != 0)

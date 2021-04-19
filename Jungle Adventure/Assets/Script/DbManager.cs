@@ -84,4 +84,8 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         }
         
     }
+    public void ClearData()
+    {
+        level.Clear();
+    }
 }
