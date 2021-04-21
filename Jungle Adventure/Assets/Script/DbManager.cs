@@ -8,21 +8,10 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
 
     private List<string> level;
-    private int playerNumbers = 0;
-    private int numberPlayers;
-    private float lineEnd;
-    private float lineEnd2;
-    private int scoreEnd2;
-    private int playersFinished;
-
+    private bool playerHasBeenAdded = false;
 
     public List<string> Level => level;
-    public int NumberPlayers => numberPlayers;
-    public float LineEnd => lineEnd;
-    public float LineEnd2 => lineEnd2;
-    public int ScoreEnd2 => scoreEnd2;
-    public int PlayersFinished => playersFinished;
-    public int PlayerNumbers => playerNumbers;
+    public bool PlayerHasBeenAdded => playerHasBeenAdded;
 
     private void Start()
     {
@@ -83,6 +72,36 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
           
         }
         
+    }
+    public IEnumerator SendUser(string player_name, int money)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            form.AddField("Player_Set", player_name);
+            form.AddField("Money_Set", money);
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                if(uwr.downloadHandler.text == "Успех. Пользователь добавлен")
+                {
+                    playerHasBeenAdded = true;
+                }
+            }
+        }
+
     }
     public void ClearData()
     {

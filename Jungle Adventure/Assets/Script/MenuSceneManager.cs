@@ -21,19 +21,19 @@ public class MenuSceneManager : MonoBehaviour
     {
         LevelSelection.SetActive(true);
         Menu.SetActive(false);
-        for (i = 1; i < DbManager.Instance.Level.Count; i++)
-        {
-            if (DbManager.Instance.Level[i] == "1")
-            {
-                LevelGame[i].GetComponent<Image>().sprite = (Sprite)Resources.Load("Image/MenuImage/MenuLevel" + (i + 1), typeof(Sprite));
-                LevelGame[i].GetComponent<Button>().interactable = true;
-            } 
-            if(i == 4)
-            {
-                DbManager.Instance.ClearData();
-            }
-        }
-        i = 0;
+        //for (i = 1; i < DbManager.Instance.Level.Count; i++)
+        //{
+        //    if (DbManager.Instance.Level[i] == "1")
+        //    {
+        //        LevelGame[i].GetComponent<Image>().sprite = (Sprite)Resources.Load("Image/MenuImage/MenuLevel" + (i + 1), typeof(Sprite));
+        //        LevelGame[i].GetComponent<Button>().interactable = true;
+        //    } 
+        //    if(i == 4)
+        //    {
+        //        DbManager.Instance.ClearData();
+        //    }
+        //}
+        //i = 0;
     }
     public void ClickBackMenu()
     {
@@ -50,6 +50,6 @@ public class MenuSceneManager : MonoBehaviour
     }
     public void GetComplitedLevel()
     {
-        StartCoroutine(DbManager.Instance.GetLevel());
+        //StartCoroutine(DbManager.Instance.GetLevel());
     }
 }
