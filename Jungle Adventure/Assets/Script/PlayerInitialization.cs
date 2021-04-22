@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Networking;
 
 public class PlayerInitialization : MonoBehaviour
 {
+    string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
     void Start()
     {
         //PlayerPrefs.DeleteKey("PlayerRegister");
@@ -12,13 +14,46 @@ public class PlayerInitialization : MonoBehaviour
         {
             System.Random rnd = new System.Random();
             int value = rnd.Next(0, 100000);
-            string namePlayer = "Player25218";
-            StartCoroutine(DbManager.Instance.SendUser(namePlayer, 0));
-            if (DbManager.Instance.PlayerHasBeenAdded)
-            {
-                PlayerPrefs.SetString("PlayerRegister", namePlayer);
-            }
+            string namePlayer = "Player" + value;
+            StartCoroutine(SendUser(namePlayer, 0));
+        }
 
+    }
+    public IEnumerator SendUser(string playerName, int money)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            form.AddField("Player_Set", playerName);
+            form.AddField("Money_Set", money);
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                if (uwr.downloadHandler.text == "Пользователь существует")
+                {
+                    System.Random rnd = new System.Random();
+                    int value = rnd.Next(0, 100000);
+                    string namePlayer = "Player" + value;
+                    StartCoroutine(SendUser(namePlayer, 0));
+                }
+                else
+                {
+                    //StartCoroutine(DbManager.Instance.SendLevelCompleted("Level1", playerName));
+                    PlayerPrefs.SetString("PlayerRegister", playerName);
+                }
+            }
         }
 
     }

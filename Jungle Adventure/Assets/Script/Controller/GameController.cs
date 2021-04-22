@@ -157,7 +157,8 @@ public class GameController : MonoBehaviour
         EndLevelTime_text.text = GameMinutes + ":" + GameSeconds;
         EndLevelCoin_text.text = coin.ToString();
         EndLevelScore_text.text = score.ToString();
-        //StartCoroutine(DbManager.Instance.SendLevel("level" + (sceneIndex + 1), "1")); 
+        string playerName = PlayerPrefs.GetString("PlayerRegister");
+        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
     }
     public void RestartLevel()
     {
