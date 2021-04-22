@@ -50,7 +50,6 @@ public class PlayerInitialization : MonoBehaviour
                 }
                 else
                 {
-                    //StartCoroutine(DbManager.Instance.SendLevelCompleted("Level1", playerName));
                     PlayerPrefs.SetString("PlayerRegister", playerName);
                 }
             }

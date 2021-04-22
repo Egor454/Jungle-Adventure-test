@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -15,19 +16,19 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text amountCoin_text;
     [SerializeField] private Text amountScore_text;
 
-    [SerializeField] private Text EndLevelCoin_text;
-    [SerializeField] private Text EndLevelScore_text;
-    [SerializeField] private Text EndLevelTime_text;
+    [SerializeField] private Text endLevelCoin_text;
+    [SerializeField] private Text endLevelScore_text;
+    [SerializeField] private Text endLevelTime_text;
 
-    [SerializeField] private Text DieCoin_text;
-    [SerializeField] private Text DieScore_text;
-    [SerializeField] private Text DieTime_text;
+    [SerializeField] private Text dieCoin_text;
+    [SerializeField] private Text dieScore_text;
+    [SerializeField] private Text dieTime_text;
 
     [SerializeField] private Camera camera;
 
-    [SerializeField] private GameObject UiGame;
-    [SerializeField] private GameObject MassageBoxGameOver;
-    [SerializeField] private GameObject MassageBoxCompliteLevel;
+    [SerializeField] private GameObject uiGame;
+    [SerializeField] private GameObject massageBoxGameOver;
+    [SerializeField] private GameObject massageBoxCompliteLevel;
 
     private PlayerController playerController;
     private PlayerModel playerModel;
@@ -39,8 +40,8 @@ public class GameController : MonoBehaviour
     private int score;
     private int sceneIndex;
 
-    private float GameSeconds = 0.0f;
-    private float GameMinutes = 0.0f;
+    private float gameSeconds = 0.0f;
+    private float gameMinutes = 0.0f;
     public void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -66,11 +67,11 @@ public class GameController : MonoBehaviour
     {
         amountCoin_text.text = coin.ToString();
         amountScore_text.text = score.ToString();
-        GameSeconds = GameSeconds + Time.deltaTime;
-        if (GameSeconds >= 60.0f)
+        gameSeconds = gameSeconds + Time.deltaTime;
+        if (gameSeconds >= 60.0f)
         {
-            GameMinutes = GameMinutes + 1.0f;
-            GameSeconds = 0.0f;
+            gameMinutes = gameMinutes + 1.0f;
+            gameSeconds = 0.0f;
         }
 
     }
@@ -141,22 +142,22 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
-        UiGame.SetActive(false);
-        MassageBoxGameOver.SetActive(true);
+        uiGame.SetActive(false);
+        massageBoxGameOver.SetActive(true);
 
-        DieTime_text.text = GameMinutes + ":" + GameSeconds;
-        DieCoin_text.text = coin.ToString();
-        DieScore_text.text = score.ToString();
+        dieTime_text.text = gameMinutes + ":" + gameSeconds;
+        dieCoin_text.text = coin.ToString();
+        dieScore_text.text = score.ToString();
     }
     public void LevelComplited()
     {
         camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
-        UiGame.SetActive(false);
-        MassageBoxCompliteLevel.SetActive(true);
+        uiGame.SetActive(false);
+        massageBoxCompliteLevel.SetActive(true);
 
-        EndLevelTime_text.text = GameMinutes + ":" + GameSeconds;
-        EndLevelCoin_text.text = coin.ToString();
-        EndLevelScore_text.text = score.ToString();
+        endLevelTime_text.text = gameMinutes + ":" + gameSeconds;
+        endLevelCoin_text.text = coin.ToString();
+        endLevelScore_text.text = score.ToString();
         string playerName = PlayerPrefs.GetString("PlayerRegister");
         StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
     }
@@ -166,10 +167,12 @@ public class GameController : MonoBehaviour
     }
     public void BackMainScreen()
     {
+        StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
         SceneManager.LoadScene("Menu");
     }
     public void NextLevel()
     {
+        StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
         SceneManager.LoadScene(sceneIndex + 1);
     }
 }

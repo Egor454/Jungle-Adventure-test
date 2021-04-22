@@ -19,7 +19,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     {
         level = new List<string>();
     }
-    public IEnumerator SendLevelCompleted(string level_name, string player_name)
+    public IEnumerator SendLevelCompleted(string levelName, string playerNname)
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
@@ -30,8 +30,8 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             Debug.Log("internet connection");
 
             WWWForm form = new WWWForm();
-            form.AddField("Level", level_name);
-            form.AddField("NamePlayer", player_name);
+            form.AddField("Level", levelName);
+            form.AddField("NamePlayer", playerNname);
             UnityWebRequest uwr = UnityWebRequest.Post(url, form);
             yield return uwr.SendWebRequest();
             if (uwr.isNetworkError)
@@ -45,7 +45,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         }
 
     }
-    public IEnumerator GetLevel()
+    public IEnumerator GetLevel( string playerName)
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
@@ -56,9 +56,10 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             Debug.Log("internet connection");
             for (int i = 1; i < 5; i++)
             {
-                string level_name = "level" + i;
+                string levelName = "level" + i;
                 WWWForm form = new WWWForm();
-                form.AddField("LevelGet", level_name);
+                form.AddField("PlayerCompletedLevel", playerName);
+                form.AddField("CompletedLevelName", levelName);
                 UnityWebRequest uwr = UnityWebRequest.Post(url, form);
                 yield return uwr.SendWebRequest();
                 if (uwr.isNetworkError)
@@ -68,14 +69,49 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
                 else
                 {
                     Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
-                    level.Add(uwr.downloadHandler.text);
+                    if(uwr.downloadHandler.text == "Уровень пройден")
+                    {
+                        level.Add("1");
+                    }
+                    else
+                    {
+                        level.Add("0");
+                    }
                 }
             }
           
         }
         
     }
-   
+    public IEnumerator SendRecord(string levelName, string playerName ,string time, int coin, int score)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            form.AddField("SendLevelRecord", levelName);
+            form.AddField("SendPlayerRecord", playerName);
+            form.AddField("SendTimeRecord", time);
+            form.AddField("SendCoinRecord", coin);
+            form.AddField("SendScoreRecord", score); 
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+            }
+        }
+
+    }
     public void ClearData()
     {
         level.Clear();
