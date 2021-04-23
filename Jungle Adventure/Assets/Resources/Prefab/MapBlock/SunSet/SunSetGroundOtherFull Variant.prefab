@@ -99,7 +99,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fc57e17cad6b65c4fb69288656f642ba, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -229,7 +229,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fc57e17cad6b65c4fb69288656f642ba, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -322,10 +322,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6638004093470205792, guid: 61f703a63d2e70d40a2c61e7d883e8b7,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: fc57e17cad6b65c4fb69288656f642ba, type: 2}
+    - target: {fileID: 6674631272008606272, guid: 61f703a63d2e70d40a2c61e7d883e8b7,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: fc57e17cad6b65c4fb69288656f642ba, type: 2}
     - target: {fileID: 6920709686679711612, guid: 61f703a63d2e70d40a2c61e7d883e8b7,
         type: 3}
       propertyPath: m_Name
-      value: SunSetGroundOtherFull
+      value: SunSetGroundOtherFull Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61f703a63d2e70d40a2c61e7d883e8b7, type: 3}
