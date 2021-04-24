@@ -52,6 +52,10 @@ public class MenuSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level2");
     }
+    public void LoadedLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
     public void GetComplitedLevel()
     {
         StartCoroutine(DbManager.Instance.GetLevel(PlayerPrefs.GetString("PlayerRegister")));
