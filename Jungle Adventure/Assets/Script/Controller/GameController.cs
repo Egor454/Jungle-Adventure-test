@@ -167,8 +167,16 @@ public class GameController : MonoBehaviour
     }
     public void BackMainScreen()
     {
-        StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
-        SceneManager.LoadScene("Menu");
+        if (massageBoxCompliteLevel.activeSelf)
+        {
+            StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
+            SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
     }
     public void NextLevel()
     {

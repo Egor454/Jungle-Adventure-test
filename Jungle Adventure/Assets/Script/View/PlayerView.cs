@@ -17,6 +17,7 @@ public class PlayerView : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxC;
     private SpriteRenderer sprite;
+    private Transform transforms;
     GameController game;
 
     private float timeLeft = 2f;
@@ -42,6 +43,7 @@ public class PlayerView : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxC = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        transforms = GetComponent<Transform>();
  
     }
     public void Iniinitialization(GameController game)
@@ -106,14 +108,14 @@ public class PlayerView : MonoBehaviour
         }
     }
     public void ChangePositionView(float playerMove)
-    {   
-        transform.Translate(playerMove, 0, 0);
+    {
+        transforms.Translate(playerMove, 0, 0);
     }
 
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3  Scaler = transform.localScale;
+        Vector3  Scaler = transforms.localScale;
         if(facingRight == false)
         {
             Scaler.x = (float)-1.5;
@@ -121,8 +123,8 @@ public class PlayerView : MonoBehaviour
         else
         {
             Scaler.x = (float)1.5;
-        } 
-        transform.localScale = Scaler;
+        }
+        transforms.localScale = Scaler;
         
     }
 

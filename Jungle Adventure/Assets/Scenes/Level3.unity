@@ -159,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 3859052814847832372, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.69992
+      value: -27.699951
       objectReference: {fileID: 0}
     - target: {fileID: 3909484459741945832, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
@@ -1091,6 +1091,26 @@ PrefabInstance:
     - target: {fileID: 6854290125320904513, guid: 10b7676f9cd7da743948ef09e31377d0,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481314958754833536, guid: 10b7676f9cd7da743948ef09e31377d0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -74.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481314958754833536, guid: 10b7676f9cd7da743948ef09e31377d0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499182920521371990, guid: 10b7676f9cd7da743948ef09e31377d0,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499182920521371990, guid: 10b7676f9cd7da743948ef09e31377d0,
+        type: 3}
+      propertyPath: m_Constraints
       value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []

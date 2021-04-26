@@ -9,14 +9,16 @@ public class GroundEnemyView : MonoBehaviour
     [SerializeField] private Transform startPos;
     private bool groundEnemy = true;
     public event UnityAction<bool> MoveGroundEnemy;
+    private Transform transforms;
 
     Vector3 nextPos;
 
     void Start()
     {
         nextPos = startPos.position;
+        transforms = GetComponent<Transform>();
     }
-    void Update()
+    void FixedUpdate()
     {
 
         MoveGroundEnemy?.Invoke(groundEnemy);
@@ -26,19 +28,19 @@ public class GroundEnemyView : MonoBehaviour
     {
         if(this != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
-            Vector3 Scaler = transform.localScale;
-            if (transform.position.x == firstBorder.position.x)
+            transforms.position = Vector3.MoveTowards(transforms.position, nextPos, speed * Time.deltaTime);
+            Vector3 Scaler = transforms.localScale;
+            if (transforms.position.x == firstBorder.position.x)
             {
                 nextPos = secondBorder.position;
                 Scaler.x = -7;
-                transform.localScale = Scaler;
+                transforms.localScale = Scaler;
             }
-            if (transform.position.x == secondBorder.position.x)
+            if (transforms.position.x == secondBorder.position.x)
             {
                 nextPos = firstBorder.position;
                 Scaler.x = 7;
-                transform.localScale = Scaler;
+                transforms.localScale = Scaler;
             }
 
         }
