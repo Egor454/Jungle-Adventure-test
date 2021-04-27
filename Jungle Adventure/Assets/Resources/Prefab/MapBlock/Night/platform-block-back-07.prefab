@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6730689785048334979}
   - component: {fileID: 8503399220649793313}
   - component: {fileID: 6263228832656148788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: platform-block-back-07
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

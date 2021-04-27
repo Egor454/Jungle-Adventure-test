@@ -18,7 +18,7 @@ public class PlayerView : MonoBehaviour
     private BoxCollider2D boxC;
     private SpriteRenderer sprite;
     private Transform transforms;
-    GameController game;
+    private GameController game;
 
     private float timeLeft = 2f;
     private bool invulnerability = false;

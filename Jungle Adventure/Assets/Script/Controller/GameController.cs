@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject[] groundEnemyPrefab;
     [SerializeField] private GameObject[] flyingEnemyPrefab;
+    [SerializeField] private GameObject[] groundPrefab;
 
     [SerializeField] private Image heart1;
     [SerializeField] private Image heart2;
@@ -33,9 +34,13 @@ public class GameController : MonoBehaviour
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
-    private GroundEnemyController groundenemyController;
+    private GroundEnemyController groundEnemyController;
     private FlyingEnemyModel flyingEnemyModel;
-    private FlyingEnemyController FlyingEnemyController;
+    private FlyingEnemyController flyingEnemyController;
+    private GroundController groundController;
+    private GroundModel groundModel;
+    private GroundView groundView;
+
     private int coin;
     private int score;
     private int sceneIndex;
@@ -52,16 +57,27 @@ public class GameController : MonoBehaviour
         {
             groundEnemyModel = new GroundEnemyModel();
             var groundEnemyView = objet.GetComponent<GroundEnemyView>();
-            groundenemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel);
+            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel);
         }
         foreach (GameObject objet in flyingEnemyPrefab)
         {
             flyingEnemyModel = new FlyingEnemyModel();
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
-            FlyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel);
+            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel);
         }
         playerController = new PlayerController(playerView, playerModel);
         playerView.Iniinitialization(this);
+
+        if(sceneIndex == 4)
+        {
+            foreach (GameObject objet in groundPrefab)
+            {
+                groundModel = new GroundModel();
+                groundView = objet.GetComponent<GroundView>();
+                groundController = new GroundController(groundView, groundModel);
+                groundView.Iniinitialization(this);
+            }
+        }
     }
     private void Update()
     {
