@@ -3,7 +3,9 @@
 public class FlyingEnemyModel 
 {
     private float speed = 3f;
+    private int damage = 1;
     public event UnityAction<float> ChangedEnemyPositionModel;
+    public event UnityAction<int> SendDamageToPlayer;
 
     public void ChangePositionEnemy(bool enemy)
     {
@@ -12,5 +14,9 @@ public class FlyingEnemyModel
             ChangedEnemyPositionModel?.Invoke(speed);
         }
 
+    }
+    public void SendDamageEnemy()
+    {
+        SendDamageToPlayer?.Invoke(damage);
     }
 }

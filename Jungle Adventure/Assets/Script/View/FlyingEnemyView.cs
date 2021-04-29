@@ -9,6 +9,7 @@ public class FlyingEnemyView : MonoBehaviour
     [SerializeField] private Transform startPos;
     private bool flyingEnemy = true;
     public event UnityAction<bool> MoveFlyingEnemy;
+    public event UnityAction DamageToPlayer;
     private Transform transforms;
 
     Vector3 nextPos;
@@ -38,6 +39,13 @@ public class FlyingEnemyView : MonoBehaviour
             nextPos = firstBorder.position;
             Scaler.x = 7;
             transforms.localScale = Scaler;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            DamageToPlayer?.Invoke();
         }
     }
 }

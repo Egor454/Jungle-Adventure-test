@@ -1753,6 +1753,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2091116223676560099, guid: f324137d842e450498154ff4f1aee075,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091116223676560099, guid: f324137d842e450498154ff4f1aee075,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3979056121684321352, guid: f324137d842e450498154ff4f1aee075,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1813,11 +1823,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7955352978385741010, guid: f324137d842e450498154ff4f1aee075,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8731236066343998234, guid: f324137d842e450498154ff4f1aee075,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 8731236066343998234, guid: f324137d842e450498154ff4f1aee075,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f324137d842e450498154ff4f1aee075, type: 3}
 --- !u!1001 &1225310089
@@ -2823,6 +2843,11 @@ PrefabInstance:
       propertyPath: groundPrefab.Array.data[14]
       value: 
       objectReference: {fileID: 306482495}
+    - target: {fileID: 4199526772494797183, guid: 93ad1ad34be2a20448c7057ed4cbe931,
+        type: 3}
+      propertyPath: bossPrefab
+      value: 
+      objectReference: {fileID: 1810559948}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93ad1ad34be2a20448c7057ed4cbe931, type: 3}
 --- !u!1 &1777139871
@@ -2909,8 +2934,8 @@ GameObject:
   - component: {fileID: 1810559949}
   - component: {fileID: 1810559951}
   - component: {fileID: 1810559952}
-  - component: {fileID: 1810559953}
   - component: {fileID: 1810559954}
+  - component: {fileID: 1810559953}
   m_Layer: 12
   m_Name: Boss
   m_TagString: Boss
@@ -2956,7 +2981,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 68a3da60bdf0d3f48b52b832d017224b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3013,8 +3038,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7897903d792d946aabaf277ced4d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1810559953
-BoxCollider2D:
+--- !u!60 &1810559953
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3026,7 +3051,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.012611389}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3036,9 +3061,102 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 10.25, y: 10.214777}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.815, y: -3.78}
+      - {x: -0.815, y: -3.79}
+      - {x: -0.155, y: -5.1}
+      - {x: -0.155, y: -5.12}
+      - {x: -0.105, y: -5.12}
+      - {x: 0.565, y: -3.78}
+      - {x: 1.3149999, y: -3.78}
+      - {x: 1.3149999, y: -3.79}
+      - {x: 1.9749999, y: -5.1}
+      - {x: 1.9749999, y: -5.12}
+      - {x: 2.0249999, y: -5.12}
+      - {x: 2.695, y: -3.78}
+      - {x: 2.835, y: -3.78}
+      - {x: 2.845, y: -3.79}
+      - {x: 2.965, y: -3.83}
+      - {x: 3.0149999, y: -3.85}
+      - {x: 3.955, y: -4.16}
+      - {x: 4.165, y: -4.23}
+      - {x: 4.245, y: -4.25}
+      - {x: 4.255, y: -4.22}
+      - {x: 3.7749999, y: -2.78}
+      - {x: 3.7949998, y: -2.77}
+      - {x: 5.125, y: -2.1}
+      - {x: 5.125, y: -2.06}
+      - {x: 3.7949998, y: -1.4}
+      - {x: 3.7749999, y: -1.39}
+      - {x: 3.7749999, y: -0.72999996}
+      - {x: 3.7849998, y: -0.72999996}
+      - {x: 5.095, y: -0.07}
+      - {x: 5.115, y: -0.07}
+      - {x: 5.125, y: -0.06}
+      - {x: 5.125, y: -0.02}
+      - {x: 3.7949998, y: 0.64}
+      - {x: 3.7749999, y: 0.65}
+      - {x: 3.7749999, y: 1.4}
+      - {x: 3.7849998, y: 1.4}
+      - {x: 5.095, y: 2.06}
+      - {x: 5.115, y: 2.06}
+      - {x: 5.125, y: 2.07}
+      - {x: 5.125, y: 2.11}
+      - {x: 3.7949998, y: 2.77}
+      - {x: 3.7749999, y: 2.78}
+      - {x: 4.225, y: 4.15}
+      - {x: 4.245, y: 4.21}
+      - {x: 4.245, y: 4.24}
+      - {x: 4.225, y: 4.2599998}
+      - {x: 4.205, y: 4.2599998}
+      - {x: 2.825, y: 3.8}
+      - {x: 2.7849998, y: 3.78}
+      - {x: 2.695, y: 3.78}
+      - {x: 2.0249999, y: 5.12}
+      - {x: 1.9749999, y: 5.12}
+      - {x: 1.9749999, y: 5.1}
+      - {x: 1.305, y: 3.78}
+      - {x: 0.565, y: 3.78}
+      - {x: -0.105, y: 5.12}
+      - {x: -0.155, y: 5.12}
+      - {x: -0.155, y: 5.1}
+      - {x: -0.825, y: 3.78}
+      - {x: -1.475, y: 3.78}
+      - {x: -2.145, y: 5.12}
+      - {x: -2.195, y: 5.12}
+      - {x: -2.845, y: 3.82}
+      - {x: -2.865, y: 3.81}
+      - {x: -4.1549997, y: 4.24}
+      - {x: -4.235, y: 4.2599998}
+      - {x: -4.255, y: 4.24}
+      - {x: -4.255, y: 4.21}
+      - {x: -3.8049998, y: 2.86}
+      - {x: -3.7849998, y: 2.82}
+      - {x: -3.8049998, y: 2.77}
+      - {x: -5.125, y: 2.11}
+      - {x: -5.125, y: 2.06}
+      - {x: -5.105, y: 2.06}
+      - {x: -3.7849998, y: 1.39}
+      - {x: -3.7849998, y: 0.65}
+      - {x: -5.125, y: -0.02}
+      - {x: -5.125, y: -0.07}
+      - {x: -5.105, y: -0.07}
+      - {x: -3.7849998, y: -0.74}
+      - {x: -3.7849998, y: -1.39}
+      - {x: -5.125, y: -2.06}
+      - {x: -5.125, y: -2.11}
+      - {x: -3.7849998, y: -2.78}
+      - {x: -4.255, y: -4.2}
+      - {x: -4.255, y: -4.24}
+      - {x: -4.225, y: -4.25}
+      - {x: -2.905, y: -3.81}
+      - {x: -2.855, y: -3.79}
+      - {x: -2.195, y: -5.12}
+      - {x: -2.145, y: -5.12}
+      - {x: -1.645, y: -4.12}
+      - {x: -1.645, y: -4.1}
+      - {x: -1.475, y: -3.78}
 --- !u!50 &1810559954
 Rigidbody2D:
   serializedVersion: 4
@@ -3659,6 +3777,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 694573017122324951, guid: f6e930847b173064280c3d4a43240479,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6e930847b173064280c3d4a43240479, type: 3}
 --- !u!114 &2114093733 stripped

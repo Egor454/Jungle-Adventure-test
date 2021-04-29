@@ -24,7 +24,7 @@ public class PlayerView : MonoBehaviour
     private bool invulnerability = false;
 
     public event UnityAction <float> ChangedPosition;
-    public event UnityAction GetDamage;
+    public event UnityAction GetDamagePlatform;
     public event UnityAction DeathPlayer;
     public event UnityAction  HealPlayer;
 
@@ -135,13 +135,15 @@ public class PlayerView : MonoBehaviour
             if (isEnemy)
             {
                 game.KillTheEnemy(other);
-                return;
             }
-            GetDamage?.Invoke();
+        }
+        if (other.gameObject.tag == "Boss")
+        {
+            GetDamagePlatform?.Invoke();
         }
         if (other.gameObject.tag == "DamagePlatform")
         {
-            GetDamage?.Invoke();
+            GetDamagePlatform?.Invoke();
         }
         if (other.gameObject.tag == "Death")
         {
@@ -173,15 +175,10 @@ public class PlayerView : MonoBehaviour
     }
     public  void GetHealth(int hp)
     {
-        helthPlayer = hp;
-        game.ChangeHp(helthPlayer);
+        game.ChangeHp(hp);
         EnableInvulnerability();
-        if (helthPlayer == 0)
-        {
-            Death();
-        }
     }
-    private void Death()
+    public void Death()
     {
         game.DeathPlayer();
     }
@@ -207,6 +204,6 @@ public class PlayerView : MonoBehaviour
     public void UpdateHealth(int hp)
     {
         helthPlayer = hp;
-        game.ChangeHeartOnScreen(helthPlayer);
+        game.ChangeHeartOnScreen(hp);
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine.Events;
 public class GroundView : MonoBehaviour
 {
     public event UnityAction GetDamage;
-    GameController game;
+    private GameController game;
     public void Iniinitialization(GameController game)
     {
         this.game = game;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Boss")
         {
@@ -22,7 +22,7 @@ public class GroundView : MonoBehaviour
     {
         if (!living)
         {
-
+            game.DestroyGround(gameObject);
         }
     }
 }

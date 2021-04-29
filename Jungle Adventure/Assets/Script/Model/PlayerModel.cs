@@ -9,6 +9,7 @@ public class PlayerModel
     public  event UnityAction <float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
     public event UnityAction<int> UpgradeTheAmountOfHealth;
+    public event UnityAction PlayerDeath;
 
 
 
@@ -25,16 +26,29 @@ public class PlayerModel
         ChangedPositionModel?.Invoke(playerMove);
         playerMove = 0;
     }
-    public void ChangeHealth()
+    public void ChangeHealth(int damage)
     {
-        health -= 1;
+        health -= damage;
+        if(health == 0)
+        {
+            PlayerDeath?.Invoke();
+        }
         GetHealth?.Invoke(health);
 
+    }
+    public void GetDamagePlatform()
+    {
+        health -= 1;
+        if (health == 0)
+        {
+            PlayerDeath?.Invoke();
+        }
+        GetHealth?.Invoke(health);
     }
     public void Death()
     {
         health = 0;
-        GetHealth?.Invoke(health);
+        PlayerDeath?.Invoke();
     }
     public void GetHealthPotion()
     {

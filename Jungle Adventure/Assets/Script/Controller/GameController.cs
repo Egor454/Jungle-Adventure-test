@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject[] groundEnemyPrefab;
     [SerializeField] private GameObject[] flyingEnemyPrefab;
     [SerializeField] private GameObject[] groundPrefab;
+    [SerializeField] private GameObject bossPrefab;
 
     [SerializeField] private Image heart1;
     [SerializeField] private Image heart2;
@@ -47,6 +48,8 @@ public class GameController : MonoBehaviour
 
     private float gameSeconds = 0.0f;
     private float gameMinutes = 0.0f;
+
+    private bool enemyWasKill = false;
     public void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -57,13 +60,13 @@ public class GameController : MonoBehaviour
         {
             groundEnemyModel = new GroundEnemyModel();
             var groundEnemyView = objet.GetComponent<GroundEnemyView>();
-            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel);
+            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel,this);
         }
         foreach (GameObject objet in flyingEnemyPrefab)
         {
             flyingEnemyModel = new FlyingEnemyModel();
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
-            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel);
+            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel,this);
         }
         playerController = new PlayerController(playerView, playerModel);
         playerView.Iniinitialization(this);
@@ -77,6 +80,8 @@ public class GameController : MonoBehaviour
                 groundController = new GroundController(groundView, groundModel);
                 groundView.Iniinitialization(this);
             }
+            var bossEnemy = bossPrefab.GetComponent<BossEnemy>();
+            bossEnemy.Iniinitialization(this);
         }
     }
     private void Update()
@@ -153,7 +158,8 @@ public class GameController : MonoBehaviour
         {
             score += 200;
         }
-        Destroy(enemy, 0.1f);
+        Destroy(enemy);
+        enemyWasKill = true;
     }
     public void GameOver()
     {
@@ -175,7 +181,7 @@ public class GameController : MonoBehaviour
         endLevelCoin_text.text = coin.ToString();
         endLevelScore_text.text = score.ToString();
         string playerName = PlayerPrefs.GetString("PlayerRegister");
-        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
+        //StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
     }
     public void RestartLevel()
     {
@@ -199,4 +205,24 @@ public class GameController : MonoBehaviour
         StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
         SceneManager.LoadScene(sceneIndex + 1);
     }
+
+    public void DestroyGround(GameObject grounds)
+    {
+        GameObject ground = grounds.transform.parent.gameObject;
+        Destroy(ground, 0.1f);
+    }
+    public void DeathBoss(GameObject boss)
+    {
+        Destroy(boss, 0.1f);
+        LevelComplited();
+    }
+    public void SendDamageToPlayer(int damage)
+    {
+        if (!enemyWasKill)
+        {
+            playerController.ChangeHealthModel(damage);
+        }
+        enemyWasKill = false;
+    }
+
 }

@@ -9,6 +9,7 @@ public class GroundEnemyView : MonoBehaviour
     [SerializeField] private Transform startPos;
     private bool groundEnemy = true;
     public event UnityAction<bool> MoveGroundEnemy;
+    public event UnityAction DamageToPlayer;
     private Transform transforms;
 
     Vector3 nextPos;
@@ -43,6 +44,13 @@ public class GroundEnemyView : MonoBehaviour
                 transforms.localScale = Scaler;
             }
 
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            DamageToPlayer?.Invoke();
         }
     }
 
