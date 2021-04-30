@@ -18,24 +18,24 @@ public class PlayerView : MonoBehaviour
     private BoxCollider2D boxC;
     private SpriteRenderer sprite;
     private Transform transforms;
-    private GameController game;
 
     private float timeLeft = 2f;
     private bool invulnerability = false;
 
     public event UnityAction <float> ChangedPosition;
+    public event UnityAction<Collider2D> PlayerTakeCoin;
+    public event UnityAction<Collision2D> PlayerKillEnemy;
+    public event UnityAction PlayerEnteredThePortal;
     public event UnityAction GetDamagePlatform;
     public event UnityAction DeathPlayer;
-    public event UnityAction  HealPlayer;
+    public event UnityAction<Collider2D>  HealPlayer;
 
     private bool isGrounded;
     private bool isEnemy;
-    private bool needHeal = false;
     private int extraJump;
     private float moveInput = 0;
     private bool facingRight = true;
 
-    private int helthPlayer;
 
     void Start()
     {
@@ -45,10 +45,6 @@ public class PlayerView : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         transforms = GetComponent<Transform>();
  
-    }
-    public void Iniinitialization(GameController game)
-    {
-        this.game = game;
     }
     private void FixedUpdate()
     {
@@ -134,12 +130,8 @@ public class PlayerView : MonoBehaviour
         {
             if (isEnemy)
             {
-                game.KillTheEnemy(other);
+                PlayerKillEnemy?.Invoke(other);
             }
-        }
-        if (other.gameObject.tag == "Boss")
-        {
-            GetDamagePlatform?.Invoke();
         }
         if (other.gameObject.tag == "DamagePlatform")
         {
@@ -154,35 +146,21 @@ public class PlayerView : MonoBehaviour
     {
         if(collision.gameObject.tag == "Coin")
         {
-            game.СollectingСoins(collision);
+            PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Chest")
         {
-            game.СollectingСoins(collision);
+            PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Portal")
         {
-            game.LevelComplited();
+            PlayerEnteredThePortal?.Invoke();
         }
         if (collision.gameObject.tag == "HealthPotion")
         {
-            if(helthPlayer < 3 && helthPlayer != 0)
-            {
-                HealPlayer?.Invoke();
-                game.DestroyHealthPotion(collision);
-            }
+            HealPlayer?.Invoke(collision);
         }
     }
-    public  void GetHealth(int hp)
-    {
-        game.ChangeHp(hp);
-        EnableInvulnerability();
-    }
-    public void Death()
-    {
-        game.DeathPlayer();
-    }
-
     public void EnableInvulnerability()
     {
         gameObject.layer = 10;
@@ -200,10 +178,5 @@ public class PlayerView : MonoBehaviour
             timeLeft = 2f;
         }
 
-    }
-    public void UpdateHealth(int hp)
-    {
-        helthPlayer = hp;
-        game.ChangeHeartOnScreen(hp);
     }
 }

@@ -4,11 +4,13 @@ public class PlayerController
 {
     private PlayerView playerView { get; set; }
     private PlayerModel playerModel { get; set; }
+    private GameController game;
 
-    public PlayerController(PlayerView view, PlayerModel model)
+    public PlayerController(PlayerView view, PlayerModel model,GameController games)
     {
         this.playerView = view;
         this.playerModel = model;
+        this.game = games;
 
         playerView.DeathPlayer += DeathPlayerModel;
 
@@ -22,6 +24,10 @@ public class PlayerController
         playerModel.UpgradeTheAmountOfHealth += UpgradeTheAmountOfHealthView;
 
         playerModel.PlayerDeath += PlayerDeathView;
+
+        playerView.PlayerTakeCoin += TakeCoinPlayer;
+        playerView.PlayerEnteredThePortal += PlayerComplitedLevel;
+        playerView.PlayerKillEnemy += DestroyEnemy;
     }
 
     private void DeathPlayerModel()
@@ -46,18 +52,32 @@ public class PlayerController
     }
     private void GetHealthView(int hp)
     {
-        playerView.GetHealth(hp);
+        game.ChangeHp(hp);
+        playerView.EnableInvulnerability();
     }
-    private void HealPlayerModel()
+    private void HealPlayerModel(Collider2D collision)
     {
-         playerModel.GetHealthPotion();
+         playerModel.GetHealthPotion(collision);
     }
-    private void UpgradeTheAmountOfHealthView(int hp)
+    private void UpgradeTheAmountOfHealthView(int hp, Collider2D collision)
     {
-        playerView.UpdateHealth(hp);
+        game.ChangeHeartOnScreen(hp);
+        game.DestroyHealthPotion(collision);
     }
     private void PlayerDeathView()
     {
-        playerView.Death();
+        game.DeathPlayer();
+    }
+    private void TakeCoinPlayer(Collider2D collider)
+    {
+        game.СollectingСoins(collider);
+    }
+    private void PlayerComplitedLevel()
+    {
+        game.LevelComplited();
+    }
+    private void DestroyEnemy(Collision2D other)
+    {
+        game.KillTheEnemy(other);
     }
 }

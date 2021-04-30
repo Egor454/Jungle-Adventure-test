@@ -41,7 +41,7 @@ public class FlyingEnemyView : MonoBehaviour
             transforms.localScale = Scaler;
         }
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {

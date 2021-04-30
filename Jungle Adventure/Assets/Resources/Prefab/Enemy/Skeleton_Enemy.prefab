@@ -114,6 +114,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 964615188967029938, guid: cc90c34083c3064469959de4df715ae5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 964615188967029938, guid: cc90c34083c3064469959de4df715ae5,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 5842726268636345979, guid: cc90c34083c3064469959de4df715ae5,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.000053435564
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842726268636345979, guid: cc90c34083c3064469959de4df715ae5,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0007065749
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842726268636345979, guid: cc90c34083c3064469959de4df715ae5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.038574032
+      objectReference: {fileID: 0}
     - target: {fileID: 6541193754231102573, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -127,12 +153,12 @@ PrefabInstance:
     - target: {fileID: 6541193754231102573, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.06921649
+      value: -0.07023826
       objectReference: {fileID: 0}
     - target: {fileID: 6541193754231102573, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.3835284
+      value: 0.38148487
       objectReference: {fileID: 0}
     - target: {fileID: 6541193754231102573, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
@@ -228,12 +254,12 @@ PrefabInstance:
     - target: {fileID: 8849880860828502851, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0507
+      value: -0.0513
       objectReference: {fileID: 0}
     - target: {fileID: 8849880860828502851, guid: cc90c34083c3064469959de4df715ae5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1387
+      value: 0.1358
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8701215357309194256, guid: cc90c34083c3064469959de4df715ae5, type: 3}

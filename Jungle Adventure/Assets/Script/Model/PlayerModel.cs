@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine.Events;
+using UnityEngine;
 
 public class PlayerModel 
 {
@@ -8,7 +9,7 @@ public class PlayerModel
     private  float horizontalSpeed = 0.1f;
     public  event UnityAction <float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
-    public event UnityAction<int> UpgradeTheAmountOfHealth;
+    public event UnityAction<int,Collider2D> UpgradeTheAmountOfHealth;
     public event UnityAction PlayerDeath;
 
 
@@ -17,7 +18,7 @@ public class PlayerModel
     {
         if(moveInput == 1)
         {
-            playerMove = horizontalSpeed ;
+            playerMove = horizontalSpeed;
         }
         else if(moveInput == -1)
         {
@@ -50,12 +51,12 @@ public class PlayerModel
         health = 0;
         PlayerDeath?.Invoke();
     }
-    public void GetHealthPotion()
+    public void GetHealthPotion(Collider2D collision)
     {
         if (health < 3)
         {
             health++;
-            UpgradeTheAmountOfHealth?.Invoke(health);
+            UpgradeTheAmountOfHealth?.Invoke(health, collision);
         }
 
     }

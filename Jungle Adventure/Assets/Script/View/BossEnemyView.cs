@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
-public class BossEnemy : MonoBehaviour
+public class BossEnemyView : MonoBehaviour
 {
 
-    private float speed = 3f;
+    private float speed = 4f;
     private Transform target;
     private Transform transforms;
     private float timeLeft = 5f;
@@ -17,11 +18,11 @@ public class BossEnemy : MonoBehaviour
     private float homeY;
     Vector2 positionAttacked;
     Vector2 homePosition;
-    private GameController game;
-    public void Iniinitialization(GameController game)
-    {
-        this.game = game;
-    }
+    public event UnityAction ColisionPlayer;
+    public event UnityAction<GameObject> BossDeath;
+    public event UnityAction BossAttacked;
+    public event UnityAction BossBackPosition;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -42,7 +43,7 @@ public class BossEnemy : MonoBehaviour
         {
             if (attacked)
             {
-                transforms.position = Vector2.MoveTowards(transform.position, positionAttacked, speed * Time.deltaTime);
+                BossAttacked?.Invoke();
             }
             else
             {
@@ -54,7 +55,7 @@ public class BossEnemy : MonoBehaviour
             timeWait -= Time.deltaTime;
             if (attacked)
             {
-                transforms.position = Vector2.MoveTowards(transform.position, positionAttacked, speed * Time.deltaTime);
+                BossAttacked?.Invoke();
             }
             if (timeWait < 0)
             {
@@ -62,7 +63,7 @@ public class BossEnemy : MonoBehaviour
                 homeY = 10.5f;
                 homePosition = new Vector2(homeX, homeY);
                 attacked = false;
-                transforms.position = Vector2.MoveTowards(transform.position, homePosition, speed * Time.deltaTime);
+                BossBackPosition?.Invoke();
             }
             if(transforms.position.y == homeY)
             {
@@ -72,6 +73,17 @@ public class BossEnemy : MonoBehaviour
             }
         }
         
+    }
+    public void MovingBoss(float speed)
+    {
+        if (attacked)
+        {
+            transforms.position = Vector2.MoveTowards(transform.position, positionAttacked, speed * Time.deltaTime);
+        }
+        if (moveBackposition && timeWait < 0)
+        {
+            transforms.position = Vector2.MoveTowards(transform.position, homePosition, speed * Time.deltaTime);
+        }
     }
     private void HeroAttack()
     {
@@ -88,7 +100,12 @@ public class BossEnemy : MonoBehaviour
         }
         if (other.gameObject.tag == "Death")
         {
-            game.DeathBoss(gameObject);
+            BossDeath?.Invoke(gameObject);
+        }
+        if (other.gameObject.tag == "Player")
+        {
+            ColisionPlayer?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

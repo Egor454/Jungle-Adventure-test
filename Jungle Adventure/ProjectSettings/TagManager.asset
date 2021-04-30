@@ -13,6 +13,7 @@ TagManager:
   - HealthPotion
   - Portal
   - Boss
+  - HeadEnemy
   layers:
   - Default
   - TransparentFX

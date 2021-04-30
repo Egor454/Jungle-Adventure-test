@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     private GroundController groundController;
     private GroundModel groundModel;
     private GroundView groundView;
+    private BossEnemyController bossEnemyController;
+    private BossEnemyModel bossEnemyModel;
 
     private int coin;
     private int score;
@@ -68,8 +70,7 @@ public class GameController : MonoBehaviour
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
             flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel,this);
         }
-        playerController = new PlayerController(playerView, playerModel);
-        playerView.Iniinitialization(this);
+        playerController = new PlayerController(playerView, playerModel,this);
 
         if(sceneIndex == 4)
         {
@@ -80,8 +81,10 @@ public class GameController : MonoBehaviour
                 groundController = new GroundController(groundView, groundModel);
                 groundView.Iniinitialization(this);
             }
-            var bossEnemy = bossPrefab.GetComponent<BossEnemy>();
-            bossEnemy.Iniinitialization(this);
+            bossEnemyModel = new BossEnemyModel();
+            var bossEnemyView = bossPrefab.GetComponent<BossEnemyView>();
+            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this);
+
         }
     }
     private void Update()
@@ -131,7 +134,7 @@ public class GameController : MonoBehaviour
         heart1.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
-        Destroy(playerPrefab, 0.1f);
+        playerPrefab.SetActive(false);
         GameOver();
     }
     public void СollectingСoins(Collider2D collision)
