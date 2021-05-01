@@ -116,5 +116,30 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     {
         level.Clear();
     }
-    
+    public IEnumerator UpdateMoneyPlayer(string playerName, int money)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            form.AddField("playerNameForMoney", playerName);
+            form.AddField("Money", money);
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);  
+            }
+        }
+
+    }
 }

@@ -184,7 +184,8 @@ public class GameController : MonoBehaviour
         endLevelCoin_text.text = coin.ToString();
         endLevelScore_text.text = score.ToString();
         string playerName = PlayerPrefs.GetString("PlayerRegister");
-        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
+        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName));
+        StartCoroutine(DbManager.Instance.UpdateMoneyPlayer(playerName, coin));
     }
     public void RestartLevel()
     {
