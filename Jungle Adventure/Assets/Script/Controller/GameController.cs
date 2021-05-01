@@ -184,7 +184,7 @@ public class GameController : MonoBehaviour
         endLevelCoin_text.text = coin.ToString();
         endLevelScore_text.text = score.ToString();
         string playerName = PlayerPrefs.GetString("PlayerRegister");
-        //StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
+        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName)); 
     }
     public void RestartLevel()
     {
@@ -205,8 +205,16 @@ public class GameController : MonoBehaviour
     }
     public void NextLevel()
     {
-        StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
-        SceneManager.LoadScene(sceneIndex + 1);
+        if(sceneIndex == 4)
+        {
+            StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
+            SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
+            SceneManager.LoadScene(sceneIndex + 1);
+        }
     }
 
     public void DestroyGround(GameObject grounds)
@@ -217,6 +225,7 @@ public class GameController : MonoBehaviour
     public void DeathBoss(GameObject boss)
     {
         Destroy(boss, 0.1f);
+        coin += 25;
         LevelComplited();
     }
     public void SendDamageToPlayer(int damage)

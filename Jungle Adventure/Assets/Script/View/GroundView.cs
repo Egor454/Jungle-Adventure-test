@@ -7,6 +7,11 @@ public class GroundView : MonoBehaviour
 {
     public event UnityAction GetDamage;
     private GameController game;
+    private SpriteRenderer sprite;
+    private void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
     public void Iniinitialization(GameController game)
     {
         this.game = game;
@@ -23,6 +28,17 @@ public class GroundView : MonoBehaviour
         if (!living)
         {
             game.DestroyGround(gameObject);
+        }
+    }
+    public void GetHealth(int hp)
+    {
+        if(hp == 2)
+        {
+            sprite.sprite = (Sprite)Resources.Load("Image/ImageBossFight/HeartGround" + hp, typeof(Sprite));
+        }
+        else if(hp == 1)
+        {
+            sprite.sprite = (Sprite)Resources.Load("Image/ImageBossFight/HeartGround" + hp, typeof(Sprite));
         }
     }
 }

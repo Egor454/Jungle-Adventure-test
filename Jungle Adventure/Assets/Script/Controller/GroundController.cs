@@ -8,13 +8,15 @@ public class GroundController
     private GroundModel groundModel { get; set; }
 
 
-    public GroundController(GroundView groundView, GroundModel model)
+    public GroundController(GroundView groundViews, GroundModel model)
     {
-        this.groundView = groundView;
+        this.groundView = groundViews;
         this.groundModel = model;
 
         groundView.GetDamage += GetDamageView;
         groundModel.Destroyed += DestroyedGround;
+
+        groundModel.SendHealth += SendHealthView;
     }
     private void DestroyedGround(bool living)
     {
@@ -23,5 +25,9 @@ public class GroundController
     private void GetDamageView()
     {
         groundModel.ChangeHealth();
+    }
+    private void SendHealthView(int hp)
+    {
+        groundView.GetHealth(hp);
     }
 }
