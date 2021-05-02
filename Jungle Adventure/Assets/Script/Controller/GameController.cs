@@ -32,6 +32,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject massageBoxGameOver;
     [SerializeField] private GameObject massageBoxCompliteLevel;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] AudioClip playerDeathMusic;
+    [SerializeField] AudioClip enemyDeathMusic;
+    [SerializeField] AudioClip portalMusic;
+
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
@@ -56,7 +61,7 @@ public class GameController : MonoBehaviour
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         playerModel = new PlayerModel();
-
+        audioSource = gameObject.GetComponent<AudioSource>();
         var playerView = playerPrefab.GetComponent<PlayerView>();
         foreach (GameObject objet in groundEnemyPrefab)
         {
@@ -86,6 +91,8 @@ public class GameController : MonoBehaviour
             bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this);
 
         }
+        audioSource.PlayOneShot(portalMusic);
+        AudioManager.Instance.FonMusic(sceneIndex);
     }
     private void Update()
     {
@@ -134,6 +141,7 @@ public class GameController : MonoBehaviour
         heart1.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
+        audioSource.PlayOneShot(playerDeathMusic);
         playerPrefab.SetActive(false);
         GameOver();
     }
@@ -161,6 +169,7 @@ public class GameController : MonoBehaviour
         {
             score += 200;
         }
+        audioSource.PlayOneShot(enemyDeathMusic);
         Destroy(enemy);
         enemyWasKill = true;
     }
@@ -176,6 +185,7 @@ public class GameController : MonoBehaviour
     }
     public void LevelComplited()
     {
+        audioSource.PlayOneShot(portalMusic);
         camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
         uiGame.SetActive(false);
         massageBoxCompliteLevel.SetActive(true);
@@ -189,10 +199,12 @@ public class GameController : MonoBehaviour
     }
     public void RestartLevel()
     {
+        AudioManager.Instance.ButtonClick();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void BackMainScreen()
     {
+        AudioManager.Instance.ButtonClick();
         if (massageBoxCompliteLevel.activeSelf)
         {
             StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
@@ -206,7 +218,8 @@ public class GameController : MonoBehaviour
     }
     public void NextLevel()
     {
-        if(sceneIndex == 4)
+        AudioManager.Instance.ButtonClick();
+        if (sceneIndex == 4)
         {
             StartCoroutine(DbManager.Instance.SendRecord("Level" + sceneIndex, PlayerPrefs.GetString("PlayerRegister"), gameMinutes + ":" + gameSeconds, coin, score));
             SceneManager.LoadScene("Menu");

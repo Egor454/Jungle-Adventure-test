@@ -14,6 +14,14 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private int extraJumpValue;
     [SerializeField] private Animator anim;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] AudioClip runMusic;
+    [SerializeField] AudioClip getCoinMusic;
+    [SerializeField] AudioClip getHealPotionMusic;
+    [SerializeField] AudioClip getDamageMusic;
+    [SerializeField] AudioClip jumpMusic;
+
+
     private Rigidbody2D rb;
     private BoxCollider2D boxC;
     private SpriteRenderer sprite;
@@ -35,7 +43,7 @@ public class PlayerView : MonoBehaviour
     private int extraJump;
     private float moveInput = 0;
     private bool facingRight = true;
-
+    private float time = 0.4f;
 
     void Start()
     {
@@ -68,11 +76,28 @@ public class PlayerView : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             moveInput = 1;
+            if (isGrounded == true)
+            {
+                time -= Time.deltaTime;
+                if (time < 0)
+                {
+                    audioSource.PlayOneShot(runMusic);
+                    time = 0.4f;
+                }
+            }
             ChangedPosition?.Invoke(moveInput);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             moveInput = -1;
+            if(isGrounded == true){
+                time -= Time.deltaTime;
+                if (time < 0)
+                {
+                    audioSource.PlayOneShot(runMusic);
+                    time = 0.4f;
+                }
+            } 
             ChangedPosition?.Invoke(moveInput);
         }
         if (facingRight == false && moveInput == 1)
@@ -100,6 +125,7 @@ public class PlayerView : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && extraJump == 0 && isGrounded == true)
         {
             rb.velocity = Vector2.up * jumpForce;
+            audioSource.PlayOneShot(jumpMusic);
             anim.SetBool("Ground", false);
         }
     }
@@ -131,10 +157,13 @@ public class PlayerView : MonoBehaviour
             if (isEnemy)
             {
                 PlayerKillEnemy?.Invoke(other);
+                return;
             }
+            audioSource.PlayOneShot(getDamageMusic);
         }
         if (other.gameObject.tag == "DamagePlatform")
         {
+            audioSource.PlayOneShot(getDamageMusic);
             GetDamagePlatform?.Invoke();
         }
         if (other.gameObject.tag == "Death")
@@ -146,10 +175,12 @@ public class PlayerView : MonoBehaviour
     {
         if(collision.gameObject.tag == "Coin")
         {
+            audioSource.PlayOneShot(getCoinMusic);
             PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Chest")
         {
+            audioSource.PlayOneShot(getCoinMusic);
             PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Portal")
@@ -158,6 +189,7 @@ public class PlayerView : MonoBehaviour
         }
         if (collision.gameObject.tag == "HealthPotion")
         {
+            audioSource.PlayOneShot(getHealPotionMusic);
             HealPlayer?.Invoke(collision);
         }
     }

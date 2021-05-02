@@ -11,16 +11,20 @@ public class MenuSceneManager : MonoBehaviour
     [SerializeField] private GameObject LevelSelection;
 
     [SerializeField] private Image[] LevelGame;
+    private int sceneIndex;
 
     int i;
     void Start()
     {
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
         GetComplitedLevel();
+        AudioManager.Instance.FonMusic(sceneIndex);
     }
     public void ClickLevelSelection()
     {
         LevelSelection.SetActive(true);
         Menu.SetActive(false);
+        AudioManager.Instance.ButtonClick();
         for (i = 0; i < DbManager.Instance.Level.Count; i++)
         {
             if (DbManager.Instance.Level[i] == "1")
@@ -41,23 +45,28 @@ public class MenuSceneManager : MonoBehaviour
     }
     public void ClickBackMenu()
     {
+        AudioManager.Instance.ButtonClick();
         LevelSelection.SetActive(false);
         Menu.SetActive(true);
     }
     public void LoadedLevel1()
     {
+        AudioManager.Instance.ButtonClick();
         SceneManager.LoadScene("Level1");
     }
     public void LoadedLevel2()
     {
+        AudioManager.Instance.ButtonClick();
         SceneManager.LoadScene("Level2");
     }
     public void LoadedLevel3()
     {
+        AudioManager.Instance.ButtonClick();
         SceneManager.LoadScene("Level3");
     }
     public void LoadedLevel4()
     {
+        AudioManager.Instance.ButtonClick();
         SceneManager.LoadScene("Level4");
     }
     public void GetComplitedLevel()
