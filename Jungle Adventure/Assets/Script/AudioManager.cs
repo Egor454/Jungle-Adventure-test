@@ -13,7 +13,8 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     [SerializeField] AudioClip musicLevel3;
     [SerializeField] AudioClip musicLevel4;
     [SerializeField] AudioClip ButtonClickMusic;
-
+    private bool musicSettings;
+    private bool soundSettings;
 
 
     private void Awake()
@@ -29,42 +30,69 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
         musicLevel3 = (AudioClip)Resources.Load("Music/Level3Music");
         musicLevel4 = (AudioClip)Resources.Load("Music/Level4Music");
         ButtonClickMusic = (AudioClip)Resources.Load("Music/ButtonClick");
+
+        musicSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("MusicSettings"));
+        soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));
     }
     void Update()
     {
+        
     }
     public void FonMusic(int sceneIndex)
     {
-        if(sceneIndex == 0)
+        if (musicSettings)
         {
-            audioSourceForFonMusic.clip = musicMainMenu;
-            audioSourceForFonMusic.Play();
+            if (sceneIndex == 0)
+            {
+                audioSourceForFonMusic.clip = musicMainMenu;
+                audioSourceForFonMusic.Play();
 
+            }
+            else if (sceneIndex == 1)
+            {
+                audioSourceForFonMusic.clip = musicLevel1;
+                audioSourceForFonMusic.Play();
+            }
+            else if (sceneIndex == 2)
+            {
+                audioSourceForFonMusic.clip = musicLevel2;
+                audioSourceForFonMusic.Play();
+            }
+            else if (sceneIndex == 3)
+            {
+                audioSourceForFonMusic.clip = musicLevel3;
+                audioSourceForFonMusic.Play();
+            }
+            else if (sceneIndex == 4)
+            {
+                audioSourceForFonMusic.clip = musicLevel4;
+                audioSourceForFonMusic.Play();
+            }
         }
-        else if(sceneIndex == 1)
+       
+    }
+    public void ChangeMusicSettings()
+    {
+        musicSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("MusicSettings"));
+        if (!musicSettings)
         {
-            audioSourceForFonMusic.clip = musicLevel1;
-            audioSourceForFonMusic.Play();
+            audioSourceForFonMusic.Stop();
         }
-        else if (sceneIndex == 2)
+        else
         {
-            audioSourceForFonMusic.clip = musicLevel2;
             audioSourceForFonMusic.Play();
-        }
-        else if (sceneIndex == 3)
-        {
-            audioSourceForFonMusic.clip = musicLevel3;
-            audioSourceForFonMusic.Play();
-        }
-        else if (sceneIndex == 4)
-        {
-            audioSourceForFonMusic.clip = musicLevel4;
-            audioSourceForFonMusic.Play();
+            FonMusic(0);
         }
     }
-
+    public void ChangeSoundSettings()
+    {
+        soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));
+    }
     public void ButtonClick()
     {
-        audioSourceForButton.PlayOneShot(ButtonClickMusic);
+        if (soundSettings)
+        {
+            audioSourceForButton.PlayOneShot(ButtonClickMusic);
+        }
     }
 }

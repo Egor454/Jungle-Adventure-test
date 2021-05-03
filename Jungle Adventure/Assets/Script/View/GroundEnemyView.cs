@@ -5,14 +5,29 @@ using UnityEngine.Events;
 
 public class GroundEnemyView : MonoBehaviour
 {
+    #region SerializedField
+
     [SerializeField] private Transform firstBorder, secondBorder;
     [SerializeField] private Transform startPos;
+
+    #endregion SerializedField
+
+    #region Private Fields
+
     private bool groundEnemy = true;
+    private Transform transforms;
+    Vector3 nextPos;
+
+    #endregion Private Fields
+
+    #region UnityAction
+
     public event UnityAction<bool> MoveGroundEnemy;
     public event UnityAction DamageToPlayer;
-    private Transform transforms;
 
-    Vector3 nextPos;
+    #endregion unityAction
+
+    #region Private Methods
 
     void Start()
     {
@@ -25,9 +40,21 @@ public class GroundEnemyView : MonoBehaviour
         MoveGroundEnemy?.Invoke(groundEnemy);
     }
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            DamageToPlayer?.Invoke();
+        }
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
     public void MoveEnemyPosition(float speed)
     {
-        if(this != null)
+        if (this != null)
         {
             transforms.position = Vector3.MoveTowards(transforms.position, nextPos, speed * Time.deltaTime);
             Vector3 Scaler = transforms.localScale;
@@ -46,12 +73,7 @@ public class GroundEnemyView : MonoBehaviour
 
         }
     }
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            DamageToPlayer?.Invoke();
-        }
-    }
+
+    #endregion Public Methods
 
 }

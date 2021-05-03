@@ -5,30 +5,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region Private Fields
+
     private float dumping = 1f;
     private Vector2 offset = new Vector2(2f, 0f);
     private bool isLeft;
-     private Transform player;
+    private Transform player;
     private int lastX;
+
+    #endregion Private Fields
+
+    #region Private Methods
 
     private void Start()
     {
         offset = new Vector2(Mathf.Abs(offset.x), offset.y);
         FindPlayer(isLeft);
-    }
-
-    public void FindPlayer(bool playerIsLeft)
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        lastX = Mathf.RoundToInt(player.position.x);
-        if (playerIsLeft)
-        {
-            transform.position = new Vector3(player.position.x - offset.x, player.position.y - offset.y, transform.position.z);
-        }
-        else
-        {
-            transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
-        }
     }
 
     private void Update()
@@ -53,5 +45,21 @@ public class CameraController : MonoBehaviour
             transform.position = currentPosition;
         }
     }
+
+    private void FindPlayer(bool playerIsLeft)
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        lastX = Mathf.RoundToInt(player.position.x);
+        if (playerIsLeft)
+        {
+            transform.position = new Vector3(player.position.x - offset.x, player.position.y - offset.y, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
+        }
+    }
+
+    #endregion Private Methods
 
 }

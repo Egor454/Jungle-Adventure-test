@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class BossEnemyView : MonoBehaviour
 {
+    #region Private Fields
 
     private float speed = 4f;
     private Transform target;
@@ -18,10 +19,19 @@ public class BossEnemyView : MonoBehaviour
     private float homeY;
     Vector2 positionAttacked;
     Vector2 homePosition;
+
+    #endregion Private Fields
+
+    #region UnityAction
+
     public event UnityAction ColisionPlayer;
     public event UnityAction<GameObject> BossDeath;
     public event UnityAction BossAttacked;
     public event UnityAction BossBackPosition;
+
+    #endregion UnityAction
+
+    #region Private Methods
 
     void Start()
     {
@@ -74,17 +84,6 @@ public class BossEnemyView : MonoBehaviour
         }
         
     }
-    public void MovingBoss(float speed)
-    {
-        if (attacked)
-        {
-            transforms.position = Vector2.MoveTowards(transform.position, positionAttacked, speed * Time.deltaTime);
-        }
-        if (moveBackposition && timeWait < 0)
-        {
-            transforms.position = Vector2.MoveTowards(transform.position, homePosition, speed * Time.deltaTime);
-        }
-    }
     private void HeroAttack()
     {
         float x = target.position.x;
@@ -108,4 +107,22 @@ public class BossEnemyView : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void MovingBoss(float speed)
+    {
+        if (attacked)
+        {
+            transforms.position = Vector2.MoveTowards(transform.position, positionAttacked, speed * Time.deltaTime);
+        }
+        if (moveBackposition && timeWait < 0)
+        {
+            transforms.position = Vector2.MoveTowards(transform.position, homePosition, speed * Time.deltaTime);
+        }
+    }
+    #endregion Public Methods
+
 }

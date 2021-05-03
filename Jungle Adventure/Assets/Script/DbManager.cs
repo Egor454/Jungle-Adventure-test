@@ -9,16 +9,31 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
 {
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
 
+    #region Private Fields
+
     private List<string> level;
     private bool playerHasBeenAdded = false;
 
+    #endregion Private Fields
+
+    #region Public Fields
+
     public List<string> Level => level;
     public bool PlayerHasBeenAdded => playerHasBeenAdded;
+
+    #endregion Public Fields
+
+    #region Private Methods
 
     private void Start()
     {
         level = new List<string>();
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
     public IEnumerator SendLevelCompleted(string levelName, string playerNname)
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
@@ -142,4 +157,6 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         }
 
     }
+
+    #endregion Public Methods
 }

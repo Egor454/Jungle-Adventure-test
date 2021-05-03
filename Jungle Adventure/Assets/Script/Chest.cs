@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    #region SerializedField
+
     [SerializeField] private Animator anim;
+
+    #endregion SerializedField
+
+    #region Private Fields
+
     private BoxCollider2D boxCest;
     private Chest chest;
+
+    #endregion Private Fields
+
+    #region Private Methods
 
     private void Start()
     {
@@ -23,4 +34,6 @@ public class Chest : MonoBehaviour
             
         }
     }
+
+    #endregion Private Methods
 }

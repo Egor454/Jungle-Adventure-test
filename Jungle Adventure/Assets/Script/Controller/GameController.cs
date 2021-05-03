@@ -5,6 +5,8 @@ using System;
 
 public class GameController : MonoBehaviour
 {
+    #region SerializeField
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject[] groundEnemyPrefab;
     [SerializeField] private GameObject[] flyingEnemyPrefab;
@@ -37,6 +39,9 @@ public class GameController : MonoBehaviour
     [SerializeField] AudioClip enemyDeathMusic;
     [SerializeField] AudioClip portalMusic;
 
+    #endregion SerializeField
+
+    #region Private Fields
     private PlayerController playerController;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
@@ -57,7 +62,14 @@ public class GameController : MonoBehaviour
     private float gameMinutes = 0.0f;
 
     private bool enemyWasKill = false;
-    public void Start()
+
+    private bool soundSettings;
+
+    #endregion Private Fields
+
+    #region Private Methods
+
+    private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         playerModel = new PlayerModel();
@@ -91,6 +103,8 @@ public class GameController : MonoBehaviour
             bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this);
 
         }
+        soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));
+        if (soundSettings)
         audioSource.PlayOneShot(portalMusic);
         AudioManager.Instance.FonMusic(sceneIndex);
     }
@@ -106,6 +120,11 @@ public class GameController : MonoBehaviour
         }
 
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
     public void ChangeHp(int hp)
     {
         if (hp == 2)
@@ -141,7 +160,8 @@ public class GameController : MonoBehaviour
         heart1.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart2.color = new Color(0.12f, 0.6f, 0.35f, 1f);
         heart3.color = new Color(0.12f, 0.6f, 0.35f, 1f);
-        audioSource.PlayOneShot(playerDeathMusic);
+        if (soundSettings)
+            audioSource.PlayOneShot(playerDeathMusic);
         playerPrefab.SetActive(false);
         GameOver();
     }
@@ -169,7 +189,8 @@ public class GameController : MonoBehaviour
         {
             score += 200;
         }
-        audioSource.PlayOneShot(enemyDeathMusic);
+        if (soundSettings)
+            audioSource.PlayOneShot(enemyDeathMusic);
         Destroy(enemy);
         enemyWasKill = true;
     }
@@ -185,7 +206,8 @@ public class GameController : MonoBehaviour
     }
     public void LevelComplited()
     {
-        audioSource.PlayOneShot(portalMusic);
+        if (soundSettings)
+            audioSource.PlayOneShot(portalMusic);
         camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
         uiGame.SetActive(false);
         massageBoxCompliteLevel.SetActive(true);
@@ -250,5 +272,7 @@ public class GameController : MonoBehaviour
         }
         enemyWasKill = false;
     }
+
+    #endregion Public Methods
 
 }

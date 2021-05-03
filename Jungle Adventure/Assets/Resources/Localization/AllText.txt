@@ -1,0 +1,24 @@
+Выберите уровень
+Настройки
+Язык
+Звуки
+Вкл
+Выкл
+Музыка
+Очки
+Игра Окончена
+Время
+Монеты
+Уровень Пройден
+Select level
+Settings
+Language
+Sounds
+On
+Off
+Music
+Score
+Game Over
+Time
+Coins
+Level Completed

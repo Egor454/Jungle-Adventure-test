@@ -5,10 +5,21 @@ using UnityEngine.Events;
 
 public class GroundModel 
 {
+    #region Private Methods
+
     private int health = 3;
+    private bool living = true;
+
+    #endregion Private Methods
+
+    #region UnityAction
+
     public event UnityAction<bool> Destroyed;
     public event UnityAction<int> SendHealth;
-    private bool living = true;
+
+    #endregion UnityAction
+
+    #region Public Methods
 
     public void ChangeHealth()
     {
@@ -20,4 +31,6 @@ public class GroundModel
             Destroyed?.Invoke(living);
         }
     }
+
+    #endregion Public Methods
 }

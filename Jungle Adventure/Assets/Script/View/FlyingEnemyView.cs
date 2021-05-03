@@ -5,24 +5,52 @@ using UnityEngine.Events;
 
 public class FlyingEnemyView : MonoBehaviour
 {
+    #region SerializedField
+
     [SerializeField] private Transform firstBorder, secondBorder;
     [SerializeField] private Transform startPos;
+
+    #endregion SerializedField
+
+    #region Private Fields
+
     private bool flyingEnemy = true;
+    private Transform transforms;
+    Vector3 nextPos;
+
+    #endregion Private Fields
+
+    #region UnityAction
+
     public event UnityAction<bool> MoveFlyingEnemy;
     public event UnityAction DamageToPlayer;
-    private Transform transforms;
 
-    Vector3 nextPos;
+    #endregion unityAction
+
+    #region private Methods
 
     void Start()
     {
         nextPos = startPos.position;
         transforms = GetComponent<Transform>();
     }
+
     void FixedUpdate()
     {
         MoveFlyingEnemy?.Invoke(flyingEnemy);
     }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            DamageToPlayer?.Invoke();
+        }
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
 
     public void MoveEnemyPosition(float speed)
     {
@@ -41,11 +69,6 @@ public class FlyingEnemyView : MonoBehaviour
             transforms.localScale = Scaler;
         }
     }
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            DamageToPlayer?.Invoke();
-        }
-    }
+
+    #endregion Public Methods
 }

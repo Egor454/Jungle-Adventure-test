@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerModel 
 {
-    private   float playerMove;
+    #region Private Fields
+
+    private float playerMove;
     private int health = 3;
     private  float horizontalSpeed = 0.1f;
-    public  event UnityAction <float> ChangedPositionModel;
+
+    #endregion Private Fields
+
+    #region UnityAction
+
+    public event UnityAction <float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
     public event UnityAction<int,Collider2D> UpgradeTheAmountOfHealth;
     public event UnityAction PlayerDeath;
 
+    #endregion UnityAction
 
+    #region Public Methods
 
     public void ChangePosition(float moveInput)
     {
@@ -60,4 +69,6 @@ public class PlayerModel
         }
 
     }
+
+    #endregion Public Methods
 }

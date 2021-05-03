@@ -5,6 +5,8 @@ using System.Collections;
 
 public class PlayerView : MonoBehaviour
 {
+    #region SerializeField
+
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform enemyCheck;
@@ -21,6 +23,21 @@ public class PlayerView : MonoBehaviour
     [SerializeField] AudioClip getDamageMusic;
     [SerializeField] AudioClip jumpMusic;
 
+    #endregion SerializeField
+
+    #region UnitAction
+
+    public event UnityAction<float> ChangedPosition;
+    public event UnityAction<Collider2D> PlayerTakeCoin;
+    public event UnityAction<Collision2D> PlayerKillEnemy;
+    public event UnityAction PlayerEnteredThePortal;
+    public event UnityAction GetDamagePlatform;
+    public event UnityAction DeathPlayer;
+    public event UnityAction<Collider2D> HealPlayer;
+
+    #endregion UnitAction
+
+    #region Private Fields
 
     private Rigidbody2D rb;
     private BoxCollider2D boxC;
@@ -30,20 +47,18 @@ public class PlayerView : MonoBehaviour
     private float timeLeft = 2f;
     private bool invulnerability = false;
 
-    public event UnityAction <float> ChangedPosition;
-    public event UnityAction<Collider2D> PlayerTakeCoin;
-    public event UnityAction<Collision2D> PlayerKillEnemy;
-    public event UnityAction PlayerEnteredThePortal;
-    public event UnityAction GetDamagePlatform;
-    public event UnityAction DeathPlayer;
-    public event UnityAction<Collider2D>  HealPlayer;
-
     private bool isGrounded;
     private bool isEnemy;
     private int extraJump;
     private float moveInput = 0;
     private bool facingRight = true;
     private float time = 0.4f;
+
+    private bool soundSettings;
+
+    #endregion Private Fields
+
+    #region Private Methods
 
     void Start()
     {
@@ -52,7 +67,8 @@ public class PlayerView : MonoBehaviour
         boxC = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         transforms = GetComponent<Transform>();
- 
+        soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));
+
     }
     private void FixedUpdate()
     {
@@ -76,13 +92,17 @@ public class PlayerView : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             moveInput = 1;
-            if (isGrounded == true)
+            if (soundSettings)
             {
-                time -= Time.deltaTime;
-                if (time < 0)
+                if (isGrounded == true)
                 {
-                    audioSource.PlayOneShot(runMusic);
-                    time = 0.4f;
+                    time -= Time.deltaTime;
+                    if (time < 0)
+                    {
+                        if (soundSettings)
+                            audioSource.PlayOneShot(runMusic);
+                        time = 0.4f;
+                    }
                 }
             }
             ChangedPosition?.Invoke(moveInput);
@@ -90,14 +110,20 @@ public class PlayerView : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             moveInput = -1;
-            if(isGrounded == true){
-                time -= Time.deltaTime;
-                if (time < 0)
+            if (soundSettings)
+            {
+                if (isGrounded == true)
                 {
-                    audioSource.PlayOneShot(runMusic);
-                    time = 0.4f;
+                    time -= Time.deltaTime;
+                    if (time < 0)
+                    {
+                        if (soundSettings)
+                            audioSource.PlayOneShot(runMusic);
+                        time = 0.4f;
+                    }
                 }
-            } 
+            }
+              
             ChangedPosition?.Invoke(moveInput);
         }
         if (facingRight == false && moveInput == 1)
@@ -125,13 +151,10 @@ public class PlayerView : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && extraJump == 0 && isGrounded == true)
         {
             rb.velocity = Vector2.up * jumpForce;
-            audioSource.PlayOneShot(jumpMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(jumpMusic);
             anim.SetBool("Ground", false);
         }
-    }
-    public void ChangePositionView(float playerMove)
-    {
-        transforms.Translate(playerMove, 0, 0);
     }
 
     private void Flip()
@@ -159,11 +182,13 @@ public class PlayerView : MonoBehaviour
                 PlayerKillEnemy?.Invoke(other);
                 return;
             }
-            audioSource.PlayOneShot(getDamageMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(getDamageMusic);
         }
         if (other.gameObject.tag == "DamagePlatform")
         {
-            audioSource.PlayOneShot(getDamageMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(getDamageMusic);
             GetDamagePlatform?.Invoke();
         }
         if (other.gameObject.tag == "Death")
@@ -175,12 +200,14 @@ public class PlayerView : MonoBehaviour
     {
         if(collision.gameObject.tag == "Coin")
         {
-            audioSource.PlayOneShot(getCoinMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(getCoinMusic);
             PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Chest")
         {
-            audioSource.PlayOneShot(getCoinMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(getCoinMusic);
             PlayerTakeCoin?.Invoke(collision);
         }
         if (collision.gameObject.tag == "Portal")
@@ -189,17 +216,12 @@ public class PlayerView : MonoBehaviour
         }
         if (collision.gameObject.tag == "HealthPotion")
         {
-            audioSource.PlayOneShot(getHealPotionMusic);
+            if (soundSettings)
+                audioSource.PlayOneShot(getHealPotionMusic);
             HealPlayer?.Invoke(collision);
         }
     }
-    public void EnableInvulnerability()
-    {
-        gameObject.layer = 10;
-        sprite.color = new Color(1f, 1f, 1f, 0.5f);
-        invulnerability = true;
-    }
-    private void  InvulnerabilityTimer()
+    private void InvulnerabilityTimer()
     {
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
@@ -211,4 +233,22 @@ public class PlayerView : MonoBehaviour
         }
 
     }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void ChangePositionView(float playerMove)
+    {
+        transforms.Translate(playerMove, 0, 0);
+    }
+    public void EnableInvulnerability()
+    {
+        gameObject.layer = 10;
+        sprite.color = new Color(1f, 1f, 1f, 0.5f);
+        invulnerability = true;
+    }
+
+    #endregion Public Methods
+
 }

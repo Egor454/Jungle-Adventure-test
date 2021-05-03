@@ -1,0 +1,12 @@
+selectLevel	Select level
+setting		Settings
+language	Language
+sound		Sounds
+on		On
+off		Off
+mus		Music
+scor		Score:
+gameOver	Game Over
+time		Time:
+coin		Coins:
+levelCompleted	Level Completed

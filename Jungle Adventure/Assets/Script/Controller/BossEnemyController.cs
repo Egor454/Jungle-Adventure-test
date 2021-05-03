@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class BossEnemyController 
 {
+    #region Private Fields
+
     private BossEnemyView bossEnemyView { get; set; }
     private BossEnemyModel bossEnemyModel { get; set; }
     private GameController game;
+
+    #endregion Private Fields
+
+    #region Public Methods
 
     public BossEnemyController(BossEnemyView bossEnemyViews, BossEnemyModel bossEnemyModels, GameController game)
     {
@@ -27,28 +33,40 @@ public class BossEnemyController
         bossEnemyModel.SendSpeedBoss += SendSpeedBossView;
 
     }
+
+    #endregion Public Methods
+
+    #region Private Methods
+
     private void ColisionPlayerModel()
     {
         bossEnemyModel.CollisonPlayerGet();
     }
+
     private void SendDamagePlayer(int damage)
     {
         game.SendDamageToPlayer(damage);
     }
+
     private void BossDeath(GameObject gameObject)
     {
         game.DeathBoss(gameObject);
     }
+
     private void BossAttackedModel()
     {
         bossEnemyModel.SendSpeedToMoving();
     }
+
     private void BossBackPositionModel()
     {
         bossEnemyModel.SendSpeedToMoving();
     }
+
     private void SendSpeedBossView(float speed)
     {
         bossEnemyView.MovingBoss(speed);
     }
+
+    #endregion Private Methods
 }

@@ -1,0 +1,12 @@
+selectLevel	Выберите уровень
+setting		Настройки
+language	Язык
+sound		Звуки
+on		Вкл
+off		Выкл
+mus		Музыка
+scor		Очки:
+gameOver	Игра Окончена
+time		Время:
+coin		Монеты:
+levelCompleted	Уровень Пройден

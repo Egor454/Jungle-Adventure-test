@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class PlayerInitialization : MonoBehaviour
 {
+    #region UserInit
+
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
     void Start()
     {
@@ -56,4 +58,6 @@ public class PlayerInitialization : MonoBehaviour
         }
 
     }
+
+    #endregion UserInit
 }
