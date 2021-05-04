@@ -14,6 +14,7 @@ public class MenuSceneManager : MonoBehaviour
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject levelSelection;
     [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject shop;
     [SerializeField] private Text offOnMusic;
     [SerializeField] private Text offOnSound;
     [SerializeField] private Text nameLanguage;
@@ -27,8 +28,12 @@ public class MenuSceneManager : MonoBehaviour
     private int sceneIndex;
     private bool musicSettings;
     private bool soundSettings;
+    private string namePlayer;
 
     int i;
+
+    private ShopModel shopModel;
+    private ShopController shopController;
 
     #endregion Private Fields
 
@@ -37,7 +42,9 @@ public class MenuSceneManager : MonoBehaviour
     void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        namePlayer = PlayerPrefs.GetString("PlayerRegister");
         GetComplitedLevel();
+        GetAllSkin();
         AudioManager.Instance.FonMusic(sceneIndex);
     }
     private void Awake()
@@ -129,6 +136,7 @@ public class MenuSceneManager : MonoBehaviour
         AudioManager.Instance.ButtonClick();
         levelSelection.SetActive(false);
         settings.SetActive(false);
+        shop.SetActive(false);
         menu.SetActive(true);
     }
     public void LoadedLevel1()
@@ -153,7 +161,24 @@ public class MenuSceneManager : MonoBehaviour
     }
     public void GetComplitedLevel()
     {
-        StartCoroutine(DbManager.Instance.GetLevel(PlayerPrefs.GetString("PlayerRegister")));
+        StartCoroutine(DbManager.Instance.GetLevel(namePlayer));
+    }
+
+    public void OpneShop()
+    {
+        shop.SetActive(true);
+        menu.SetActive(false);
+
+        shopModel = new ShopModel();
+        var shopView = shop.GetComponent<ShopView>();
+        shopController = new ShopController(shopView, shopModel);
+
+    }
+
+    public void GetAllSkin()
+    {
+        StartCoroutine(DbManager.Instance.GetAllSkin());
+        StartCoroutine(DbManager.Instance.GetCoinPlayer(namePlayer));
     }
 
     #endregion MenuClick

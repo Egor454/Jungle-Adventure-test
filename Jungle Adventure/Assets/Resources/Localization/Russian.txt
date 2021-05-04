@@ -1,4 +1,4 @@
-selectLevel	Выберите уровень
+selectLevel	Выбор уровня
 setting		Настройки
 language	Язык
 sound		Звуки

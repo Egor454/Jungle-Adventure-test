@@ -8,11 +8,14 @@ using UnityEngine.Networking;
 public class DbManager : MonoBehaviourSingleton<DbManager>
 {
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
+    string urlGetShop = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/shopGet.php";
 
     #region Private Fields
 
     private List<string> level;
     private bool playerHasBeenAdded = false;
+    private Skins skin;
+    private int coinPlayer;
 
     #endregion Private Fields
 
@@ -20,6 +23,8 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
 
     public List<string> Level => level;
     public bool PlayerHasBeenAdded => playerHasBeenAdded;
+    public Skins Skins => skin;
+    public int CoinPlayer => coinPlayer;
 
     #endregion Public Fields
 
@@ -28,6 +33,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     private void Start()
     {
         level = new List<string>();
+        skin = new Skins();
     }
 
     #endregion Private Methods
@@ -153,6 +159,58 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             else
             {
                 Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);  
+            }
+        }
+
+    }
+
+    public IEnumerator GetAllSkin()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            UnityWebRequest uwr = UnityWebRequest.Get(urlGetShop);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                skin = JsonUtility.FromJson<Skins>(uwr.downloadHandler.text);
+            }
+        }
+
+    }
+    public IEnumerator GetCoinPlayer(string playerName)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+
+            WWWForm form = new WWWForm();
+            form.AddField("Player_Set", playerName);
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                coinPlayer = int.Parse(uwr.downloadHandler.text);
             }
         }
 
