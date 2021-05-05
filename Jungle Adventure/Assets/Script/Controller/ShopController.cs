@@ -20,6 +20,10 @@ public class ShopController
 
         shopView.GetSkinData += GetSkinDataModel;
         shopModel.SendSkin += SendSkinDataView;
+
+        shopView.SkinWasBuy += SkinWasBuyModel;
+        shopModel.SendDataskinWasBuy += BuySkinView;
+
     }
 
     public void GetSkinDataModel()
@@ -30,6 +34,16 @@ public class ShopController
     public void SendSkinDataView(Skins skin)
     {
         shopView.LoadData(skin);
+    }
+
+    public void SkinWasBuyModel(string nameSkin)
+    {
+        shopModel.SendIdSkin(nameSkin);
+    }
+
+    public void BuySkinView(int idSkin,int costSkin)
+    {
+        shopView.SendDataAboutBuySkin(costSkin, idSkin);
     }
 
     #endregion Public Methods

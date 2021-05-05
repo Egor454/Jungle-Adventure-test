@@ -14,6 +14,7 @@ public class ShopModel
     #region UnityAction
 
     public event UnityAction<Skins> SendSkin;
+    public event UnityAction<int,int> SendDataskinWasBuy;
 
     #endregion UnityAction
 
@@ -27,6 +28,17 @@ public class ShopModel
     public void SendSkinData()
     {
         SendSkin?.Invoke(skin);
+    }
+
+    public void SendIdSkin(string nameSkin)
+    {
+        for(int i = 0; i <skin.skin.Length; i++)
+        {
+            if(nameSkin == skin.skin[i].Name)
+            {
+                SendDataskinWasBuy?.Invoke(skin.skin[i].id, skin.skin[i].Cost);
+            }
+        }
     }
 
     #endregion Public Methods

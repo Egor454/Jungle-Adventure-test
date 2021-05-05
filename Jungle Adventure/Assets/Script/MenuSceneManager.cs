@@ -179,6 +179,7 @@ public class MenuSceneManager : MonoBehaviour
     {
         StartCoroutine(DbManager.Instance.GetAllSkin());
         StartCoroutine(DbManager.Instance.GetCoinPlayer(namePlayer));
+        StartCoroutine(DbManager.Instance.GetSkinBuyPlayer(namePlayer));
     }
 
     #endregion MenuClick

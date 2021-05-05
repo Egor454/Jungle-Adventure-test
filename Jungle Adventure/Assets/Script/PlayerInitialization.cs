@@ -18,6 +18,7 @@ public class PlayerInitialization : MonoBehaviour
             int value = rnd.Next(0, 100000);
             string namePlayer = "Player" + value;
             StartCoroutine(SendUser(namePlayer, 0));
+            PlayerPrefs.SetString("SelectNowSkin", "Default");
         }
 
     }

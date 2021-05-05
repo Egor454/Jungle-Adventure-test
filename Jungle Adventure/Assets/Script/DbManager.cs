@@ -9,6 +9,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
 {
     string url = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Index.php";
     string urlGetShop = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/shopGet.php";
+    string urlShop = "http://a81985.hostru06.fornex.host/jungledb.ru/DB/Shop.php";
 
     #region Private Fields
 
@@ -16,6 +17,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     private bool playerHasBeenAdded = false;
     private Skins skin;
     private int coinPlayer;
+    private List<string> playerBuythisSkin;
 
     #endregion Private Fields
 
@@ -25,6 +27,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     public bool PlayerHasBeenAdded => playerHasBeenAdded;
     public Skins Skins => skin;
     public int CoinPlayer => coinPlayer;
+    public List<string> PlayerBuythisSkin => playerBuythisSkin;
 
     #endregion Public Fields
 
@@ -34,6 +37,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     {
         level = new List<string>();
         skin = new Skins();
+        playerBuythisSkin = new List<string>();
     }
 
     #endregion Private Methods
@@ -211,6 +215,79 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             {
                 Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
                 coinPlayer = int.Parse(uwr.downloadHandler.text);
+            }
+        }
+
+    }
+
+    public IEnumerator GetSkinBuyPlayer(string playerName)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+            for (int i = 0; i < 2; i++)
+            {
+                WWWForm form = new WWWForm();
+                form.AddField("PlayerName", playerName);
+                UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
+                yield return uwr.SendWebRequest();
+                if (uwr.isNetworkError)
+                {
+                    Debug.Log("Ошибка: " + uwr.error);
+                }
+                else
+                {
+                    Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                    if(uwr.downloadHandler.text != "" )
+                    {
+                        if (playerBuythisSkin.Count == 0)
+                        {
+                            playerBuythisSkin.Add(uwr.downloadHandler.text);
+                        }
+                        else
+                        {
+                            for (int j = 0; j < playerBuythisSkin.Count; j++)
+                            {
+                                if (playerBuythisSkin[j] != uwr.downloadHandler.text)
+                                    playerBuythisSkin.Add(uwr.downloadHandler.text);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public IEnumerator BuySkin(string playerName, int idSkin)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+            for (int i = 0; i < 2; i++)
+            {
+                WWWForm form = new WWWForm();
+                form.AddField("PlayerNameWhoBuy", playerName);
+                form.AddField("IdSkin", idSkin);
+                UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
+                yield return uwr.SendWebRequest();
+                if (uwr.isNetworkError)
+                {
+                    Debug.Log("Ошибка: " + uwr.error);
+                }
+                else
+                {
+                    Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                   
+                }
             }
         }
 
