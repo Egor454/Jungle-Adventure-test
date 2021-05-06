@@ -73,12 +73,19 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        playerPrefab = Instantiate(Resources.Load("Prefab/PrefabPlayer/" + PlayerPrefs.GetString("SelectNowSkin"), typeof(GameObject))) as GameObject;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex > 2)
+        {
+            playerPrefab = Instantiate(Resources.Load("Prefab/PrefabPlayer/" + PlayerPrefs.GetString("SelectNowSkin") + "Night", typeof(GameObject))) as GameObject;
+        }
+        else
+        {
+            playerPrefab = Instantiate(Resources.Load("Prefab/PrefabPlayer/" + PlayerPrefs.GetString("SelectNowSkin"), typeof(GameObject))) as GameObject;
+        }
         playerModel = new PlayerModel();
-        audioSource = gameObject.GetComponent<AudioSource>();
         playerPrefab.transform.position = spawnPlayer.transform.position;
         var playerView = playerPrefab.GetComponent<PlayerView>();
+        playerController = new PlayerController(playerView, playerModel, this);
         foreach (GameObject objet in groundEnemyPrefab)
         {
             groundEnemyModel = new GroundEnemyModel();
@@ -91,9 +98,8 @@ public class GameController : MonoBehaviour
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
             flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel,this);
         }
-        playerController = new PlayerController(playerView, playerModel,this);
-
-        if(sceneIndex == 4)
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (sceneIndex == 4)
         {
             foreach (GameObject objet in groundPrefab)
             {
@@ -104,7 +110,9 @@ public class GameController : MonoBehaviour
             }
             bossEnemyModel = new BossEnemyModel();
             var bossEnemyView = bossPrefab.GetComponent<BossEnemyView>();
-            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this);
+            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this, playerPrefab);
+            var lightPlayer = playerPrefab.transform.Find("Sprite Light 2D");
+            lightPlayer.gameObject.SetActive(false);
 
         }
         soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));

@@ -168,10 +168,17 @@ public class MenuSceneManager : MonoBehaviour
     {
         shop.SetActive(true);
         menu.SetActive(false);
-
+        if (Locale.currentLanguageHasBeenSet == true)
+        {
+            if (Locale.PlayerLanguage == SystemLanguage.English)
+                Localize.SetCurrentLanguage(SystemLanguage.English);
+            else if (Locale.PlayerLanguage == SystemLanguage.Russian)
+                Localize.SetCurrentLanguage(SystemLanguage.Russian);
+        }
         shopModel = new ShopModel();
         var shopView = shop.GetComponent<ShopView>();
         shopController = new ShopController(shopView, shopModel);
+        AudioManager.Instance.ButtonClick();
 
     }
 

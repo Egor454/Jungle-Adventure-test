@@ -25,6 +25,10 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if(player == null)
+        {
+            FindPlayer(isLeft);
+        }
         if (player)
         {
             int currentX = Mathf.RoundToInt(player.position.x);

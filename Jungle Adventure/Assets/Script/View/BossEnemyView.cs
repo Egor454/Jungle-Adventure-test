@@ -35,7 +35,6 @@ public class BossEnemyView : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         transforms = GetComponent<Transform>();
     }
     void FixedUpdate()
@@ -123,6 +122,12 @@ public class BossEnemyView : MonoBehaviour
             transforms.position = Vector2.MoveTowards(transform.position, homePosition, speed * Time.deltaTime);
         }
     }
+
+    public void FindPlayer(GameObject player)
+    {
+        target = player.GetComponent<Transform>();
+    }
+
     #endregion Public Methods
 
 }

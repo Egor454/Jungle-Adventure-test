@@ -10,3 +10,6 @@ gameOver	Игра Окончена
 time		Время:
 coin		Монеты:
 levelCompleted	Уровень Пройден
+shop		Магазин
+buy		Купить
+select		Выбрать

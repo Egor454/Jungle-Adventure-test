@@ -10,6 +10,9 @@
 Время
 Монеты
 Уровень Пройден
+Магазин
+Купить
+Выбрать
 Select level
 Settings
 Language
@@ -22,3 +25,6 @@ Game Over
 Time
 Coins
 Level Completed
+Shop
+Buy
+Select

@@ -14,13 +14,13 @@ public class BossEnemyController
 
     #region Public Methods
 
-    public BossEnemyController(BossEnemyView bossEnemyViews, BossEnemyModel bossEnemyModels, GameController game)
+    public BossEnemyController(BossEnemyView bossEnemyViews, BossEnemyModel bossEnemyModels, GameController game, GameObject player)
     {
 
         this.bossEnemyView = bossEnemyViews;
         this.bossEnemyModel = bossEnemyModels;
         this.game = game;
-
+        bossEnemyView.FindPlayer(player);
 
         bossEnemyView.ColisionPlayer += ColisionPlayerModel;
         bossEnemyModel.SendDamagePlayer += SendDamagePlayer;

@@ -114,6 +114,7 @@ public class ShopView : MonoBehaviour
                 SkinWasBuy?.Invoke(nameSkin);
             }
         }
+        AudioManager.Instance.ButtonClick();
     }
 
     public void SendDataAboutBuySkin(int costSkins,int idSkin)
@@ -124,6 +125,7 @@ public class ShopView : MonoBehaviour
 
     public void SelectSkin(string nameSkin)
     {
+        AudioManager.Instance.ButtonClick();
         for (int i = 0; i< selectSkin.Length; i++)
         {
             if(nameSkin == skinName[i].name)

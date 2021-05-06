@@ -10,3 +10,6 @@ gameOver	Game Over
 time		Time:
 coin		Coins:
 levelCompleted	Level Completed
+shop		Shop
+buy		Buy
+select		Select
