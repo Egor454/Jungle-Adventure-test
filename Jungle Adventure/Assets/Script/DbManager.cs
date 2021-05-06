@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -16,8 +14,8 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     private List<string> level;
     private bool playerHasBeenAdded = false;
     private Skins skin;
+    private BuySkin playerBuythisSkin;
     private int coinPlayer;
-    private List<string> playerBuythisSkin;
 
     #endregion Private Fields
 
@@ -26,8 +24,8 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     public List<string> Level => level;
     public bool PlayerHasBeenAdded => playerHasBeenAdded;
     public Skins Skins => skin;
+    public BuySkin PlayerBuythisSkin => playerBuythisSkin;
     public int CoinPlayer => coinPlayer;
-    public List<string> PlayerBuythisSkin => playerBuythisSkin;
 
     #endregion Public Fields
 
@@ -37,7 +35,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     {
         level = new List<string>();
         skin = new Skins();
-        playerBuythisSkin = new List<string>();
+        playerBuythisSkin = new BuySkin();
     }
 
     #endregion Private Methods
@@ -70,7 +68,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         }
 
     }
-    public IEnumerator GetLevel( string playerName)
+    public IEnumerator GetLevel(string playerName)
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
@@ -94,7 +92,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
                 else
                 {
                     Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
-                    if(uwr.downloadHandler.text == "Уровень пройден")
+                    if (uwr.downloadHandler.text == "Уровень пройден")
                     {
                         level.Add("1");
                     }
@@ -104,11 +102,11 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
                     }
                 }
             }
-          
+
         }
-        
+
     }
-    public IEnumerator SendRecord(string levelName, string playerName ,string time, int coin, int score)
+    public IEnumerator SendRecord(string levelName, string playerName, string time, int coin, int score)
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
@@ -123,7 +121,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             form.AddField("SendPlayerRecord", playerName);
             form.AddField("SendTimeRecord", time);
             form.AddField("SendCoinRecord", coin);
-            form.AddField("SendScoreRecord", score); 
+            form.AddField("SendScoreRecord", score);
             UnityWebRequest uwr = UnityWebRequest.Post(url, form);
             yield return uwr.SendWebRequest();
             if (uwr.isNetworkError)
@@ -162,7 +160,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             }
             else
             {
-                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);  
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
             }
         }
 
@@ -229,36 +227,20 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         else
         {
             Debug.Log("internet connection");
-            for (int i = 0; i < 2; i++)
+            WWWForm form = new WWWForm();
+            form.AddField("PlayerName", playerName);
+            UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
             {
-                WWWForm form = new WWWForm();
-                form.AddField("PlayerName", playerName);
-                UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
-                yield return uwr.SendWebRequest();
-                if (uwr.isNetworkError)
-                {
-                    Debug.Log("Ошибка: " + uwr.error);
-                }
-                else
-                {
-                    Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
-                    if(uwr.downloadHandler.text != "" )
-                    {
-                        if (playerBuythisSkin.Count == 0)
-                        {
-                            playerBuythisSkin.Add(uwr.downloadHandler.text);
-                        }
-                        else
-                        {
-                            for (int j = 0; j < playerBuythisSkin.Count; j++)
-                            {
-                                if (playerBuythisSkin[j] != uwr.downloadHandler.text)
-                                    playerBuythisSkin.Add(uwr.downloadHandler.text);
-                            }
-                        }
-                    }
-                }
+                Debug.Log("Ошибка: " + uwr.error);
             }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                playerBuythisSkin = JsonUtility.FromJson<BuySkin>(uwr.downloadHandler.text);
+            }
+
         }
 
     }
@@ -272,22 +254,46 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         else
         {
             Debug.Log("internet connection");
-            for (int i = 0; i < 2; i++)
+            WWWForm form = new WWWForm();
+            form.AddField("PlayerNameWhoBuy", playerName);
+            form.AddField("IdSkin", idSkin);
+            UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
             {
-                WWWForm form = new WWWForm();
-                form.AddField("PlayerNameWhoBuy", playerName);
-                form.AddField("IdSkin", idSkin);
-                UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
-                yield return uwr.SendWebRequest();
-                if (uwr.isNetworkError)
-                {
-                    Debug.Log("Ошибка: " + uwr.error);
-                }
-                else
-                {
-                    Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
-                   
-                }
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+            }
+        }
+
+    }
+
+    public IEnumerator ChangeMoneyPlayer(string playerName, int costSkin)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+            WWWForm form = new WWWForm();
+            coinPlayer = coinPlayer - costSkin;
+            form.AddField("PlayerNameWhoBuy", playerName);
+            form.AddField("MoneyPlayerChange", coinPlayer);
+            UnityWebRequest uwr = UnityWebRequest.Post(urlShop, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+
             }
         }
 

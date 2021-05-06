@@ -41,7 +41,7 @@ public class ShopView : MonoBehaviour
 
     void Update()
     {
-
+        coinPlayerText.text = DbManager.Instance.CoinPlayer.ToString();
     }
 
     #endregion Private Methods
@@ -65,13 +65,13 @@ public class ShopView : MonoBehaviour
         }
         coinPlayerText.text = DbManager.Instance.CoinPlayer.ToString();
 
-        if(DbManager.Instance.PlayerBuythisSkin.Count != 0)
+        if (DbManager.Instance.PlayerBuythisSkin.buySkin.Length != 0)
         {
-            for(int i = 0; i < DbManager.Instance.PlayerBuythisSkin.Count; i++)
+            for (int i = 0; i < DbManager.Instance.PlayerBuythisSkin.buySkin.Length; i++)
             {
                 for (int j = 0; j < skin.skin.Length; j++)
                 {
-                    if(DbManager.Instance.PlayerBuythisSkin[i] == skin.skin[j].id.ToString())
+                    if (DbManager.Instance.PlayerBuythisSkin.buySkin[i].magazin_id == skin.skin[j].id.ToString())
                     {
                         buySkin[j].gameObject.SetActive(false);
                         selectSkin[j].gameObject.SetActive(true);
@@ -92,12 +92,21 @@ public class ShopView : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < skin.skin.Length; i++)
+        {
+            if (DbManager.Instance.CoinPlayer <= skin.skin[i].Cost)
+            {
+                buySkin[i].interactable = false;
+            }
+        }
+
     }
 
     public void BuySkin(string nameSkin)
     {
         for(int i = 0; i < buySkin.Length; i++)
-        {
+        { 
             if(nameSkin == skinName[i].text)
             {
                 buySkin[i].gameObject.SetActive(false);
@@ -110,6 +119,25 @@ public class ShopView : MonoBehaviour
     public void SendDataAboutBuySkin(int costSkins,int idSkin)
     {
         StartCoroutine(DbManager.Instance.BuySkin(PlayerPrefs.GetString("PlayerRegister"),idSkin));
+        StartCoroutine(DbManager.Instance.ChangeMoneyPlayer(PlayerPrefs.GetString("PlayerRegister"), costSkins));
+    }
+
+    public void SelectSkin(string nameSkin)
+    {
+        for (int i = 0; i< selectSkin.Length; i++)
+        {
+            if(nameSkin == skinName[i].name)
+            {
+                selectSkin[i].interactable = false;
+                skinWasSelect[i].gameObject.SetActive(true);
+                PlayerPrefs.SetString("SelectNowSkin", nameSkin);
+            }
+            else
+            {
+                selectSkin[i].interactable = true;
+                skinWasSelect[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     #endregion Public Methods

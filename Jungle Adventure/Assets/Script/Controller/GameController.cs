@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
     [SerializeField] AudioClip enemyDeathMusic;
     [SerializeField] AudioClip portalMusic;
 
+    [SerializeField] GameObject spawnPlayer;
+
     #endregion SerializeField
 
     #region Private Fields
@@ -71,9 +73,11 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        playerPrefab = Instantiate(Resources.Load("Prefab/PrefabPlayer/" + PlayerPrefs.GetString("SelectNowSkin"), typeof(GameObject))) as GameObject;
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         playerModel = new PlayerModel();
         audioSource = gameObject.GetComponent<AudioSource>();
+        playerPrefab.transform.position = spawnPlayer.transform.position;
         var playerView = playerPrefab.GetComponent<PlayerView>();
         foreach (GameObject objet in groundEnemyPrefab)
         {

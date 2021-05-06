@@ -163,11 +163,25 @@ public class PlayerView : MonoBehaviour
         Vector3  Scaler = transforms.localScale;
         if(facingRight == false)
         {
-            Scaler.x = (float)-1.5;
+            if(gameObject.name == "HeavyBandit")
+            {
+                Scaler.x = (float)-2;
+            }
+            else
+            {
+                Scaler.x = (float)-1.5;
+            }
         }
         else
         {
-            Scaler.x = (float)1.5;
+            if (gameObject.name == "HeavyBandit")
+            {
+                Scaler.x = (float)2;
+            }
+            else
+            {
+                Scaler.x = (float)1.5;
+            }
         }
         transforms.localScale = Scaler;
         
