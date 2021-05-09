@@ -13,3 +13,9 @@ levelCompleted	Уровень Пройден
 shop		Магазин
 buy		Купить
 select		Выбрать
+record		Рекорды
+placeRec	Место
+levelRec	Уровень
+timeRec		Время
+coinRec		Монеты
+scoreRec	Очки

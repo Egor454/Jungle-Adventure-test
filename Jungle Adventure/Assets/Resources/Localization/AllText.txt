@@ -13,6 +13,9 @@
 Магазин
 Купить
 Выбрать
+Рекорды
+Место
+Уровень
 Select level
 Settings
 Language
@@ -28,3 +31,6 @@ Level Completed
 Shop
 Buy
 Select
+Records
+Place
+Level

@@ -19,7 +19,6 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] AudioClip runMusic;
     [SerializeField] AudioClip getCoinMusic;
-    [SerializeField] AudioClip getHealPotionMusic;
     [SerializeField] AudioClip getDamageMusic;
     [SerializeField] AudioClip jumpMusic;
 
@@ -163,7 +162,7 @@ public class PlayerView : MonoBehaviour
         Vector3  Scaler = transforms.localScale;
         if(facingRight == false)
         {
-            if(gameObject.name == "HeavyBandit")
+            if(gameObject.name == "HeavyBandit(Clone)" || gameObject.name == "LightBandit(Clone)" || gameObject.name == "LightBanditNight(Clone)" || gameObject.name == "HeavyBanditNight(Clone)")
             {
                 Scaler.x = (float)-2;
             }
@@ -174,7 +173,7 @@ public class PlayerView : MonoBehaviour
         }
         else
         {
-            if (gameObject.name == "HeavyBandit")
+            if (gameObject.name == "HeavyBandit(Clone)" || gameObject.name == "LightBandit(Clone)" || gameObject.name == "LightBanditNight(Clone)" || gameObject.name == "HeavyBanditNight(Clone)")
             {
                 Scaler.x = (float)2;
             }
@@ -230,8 +229,6 @@ public class PlayerView : MonoBehaviour
         }
         if (collision.gameObject.tag == "HealthPotion")
         {
-            if (soundSettings)
-                audioSource.PlayOneShot(getHealPotionMusic);
             HealPlayer?.Invoke(collision);
         }
     }

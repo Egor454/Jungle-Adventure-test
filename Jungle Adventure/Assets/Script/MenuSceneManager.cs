@@ -15,6 +15,7 @@ public class MenuSceneManager : MonoBehaviour
     [SerializeField] private GameObject levelSelection;
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject shop;
+    [SerializeField] private GameObject record;
     [SerializeField] private Text offOnMusic;
     [SerializeField] private Text offOnSound;
     [SerializeField] private Text nameLanguage;
@@ -34,6 +35,8 @@ public class MenuSceneManager : MonoBehaviour
 
     private ShopModel shopModel;
     private ShopController shopController;
+    private RecordModel recordModel;
+    private RecordController recordController;
 
     #endregion Private Fields
 
@@ -46,6 +49,7 @@ public class MenuSceneManager : MonoBehaviour
         GetComplitedLevel();
         GetAllSkin();
         AudioManager.Instance.FonMusic(sceneIndex);
+        StartCoroutine(DbManager.Instance.GetRecordPlayer(namePlayer));
     }
     private void Awake()
     {
@@ -137,6 +141,7 @@ public class MenuSceneManager : MonoBehaviour
         levelSelection.SetActive(false);
         settings.SetActive(false);
         shop.SetActive(false);
+        record.SetActive(false);
         menu.SetActive(true);
     }
     public void LoadedLevel1()
@@ -181,7 +186,22 @@ public class MenuSceneManager : MonoBehaviour
         AudioManager.Instance.ButtonClick();
 
     }
-
+    public void OpenRecord()
+    {
+        record.SetActive(true);
+        menu.SetActive(false);
+        if (Locale.currentLanguageHasBeenSet == true)
+        {
+            if (Locale.PlayerLanguage == SystemLanguage.English)
+                Localize.SetCurrentLanguage(SystemLanguage.English);
+            else if (Locale.PlayerLanguage == SystemLanguage.Russian)
+                Localize.SetCurrentLanguage(SystemLanguage.Russian);
+        }
+        recordModel = new RecordModel();
+        var recordView = record.GetComponent<RecordView>();
+        recordController = new RecordController(recordView, recordModel);
+        AudioManager.Instance.ButtonClick();
+    }
     public void GetAllSkin()
     {
         StartCoroutine(DbManager.Instance.GetAllSkin());

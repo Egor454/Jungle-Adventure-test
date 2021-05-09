@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
     [SerializeField] AudioClip playerDeathMusic;
     [SerializeField] AudioClip enemyDeathMusic;
     [SerializeField] AudioClip portalMusic;
+    [SerializeField] AudioClip getHealPotionMusic;
 
     [SerializeField] GameObject spawnPlayer;
 
@@ -166,6 +167,8 @@ public class GameController : MonoBehaviour
     public void DestroyHealthPotion(Collider2D collision)
     {
         Destroy(collision.gameObject, 0.1f);
+        if (soundSettings)
+            audioSource.PlayOneShot(getHealPotionMusic);
     }
     public void DeathPlayer()
     {

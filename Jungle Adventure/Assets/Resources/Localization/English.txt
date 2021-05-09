@@ -13,3 +13,9 @@ levelCompleted	Level Completed
 shop		Shop
 buy		Buy
 select		Select
+record		Records
+placeRec	Place
+levelRec	Level
+timeRec		Time
+coinRec		Coins
+scoreRec	Score	

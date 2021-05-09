@@ -15,6 +15,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     private bool playerHasBeenAdded = false;
     private Skins skin;
     private BuySkin playerBuythisSkin;
+    private RecordPlayer recordPalyer;
     private int coinPlayer;
 
     #endregion Private Fields
@@ -26,6 +27,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
     public Skins Skins => skin;
     public BuySkin PlayerBuythisSkin => playerBuythisSkin;
     public int CoinPlayer => coinPlayer;
+    public RecordPlayer RecordPlayer => recordPalyer;
 
     #endregion Public Fields
 
@@ -36,6 +38,7 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
         level = new List<string>();
         skin = new Skins();
         playerBuythisSkin = new BuySkin();
+        recordPalyer = new RecordPlayer();
     }
 
     #endregion Private Methods
@@ -294,6 +297,32 @@ public class DbManager : MonoBehaviourSingleton<DbManager>
             {
                 Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
 
+            }
+        }
+
+    }
+
+    public IEnumerator GetRecordPlayer(string playerName)
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet access");
+        }
+        else
+        {
+            Debug.Log("internet connection");
+            WWWForm form = new WWWForm();
+            form.AddField("Get_Record", playerName);
+            UnityWebRequest uwr = UnityWebRequest.Post(url, form);
+            yield return uwr.SendWebRequest();
+            if (uwr.isNetworkError)
+            {
+                Debug.Log("Ошибка: " + uwr.error);
+            }
+            else
+            {
+                Debug.Log("Сервер ответил: " + uwr.downloadHandler.text);
+                recordPalyer = JsonUtility.FromJson<RecordPlayer>(uwr.downloadHandler.text);
             }
         }
 
