@@ -12685,6 +12685,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13645,6 +13650,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &4379299777954882976 stripped
@@ -14195,6 +14205,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14325,6 +14340,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &3779755066211124965 stripped
@@ -14805,6 +14825,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15480,6 +15505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15930,6 +15960,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16285,6 +16320,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &2742204905571965653 stripped
@@ -16360,6 +16400,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &2863543699500771964 stripped
@@ -31349,6 +31394,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31779,6 +31829,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &5332884243188596182 stripped
@@ -32029,6 +32084,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32384,6 +32444,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &4669992505711375765 stripped
@@ -32834,6 +32899,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &4974903257860961614 stripped
@@ -33009,6 +33079,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33514,6 +33589,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &8925349697647419529 stripped
@@ -33684,6 +33764,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34339,6 +34424,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &8517335634652454283 stripped
@@ -34864,6 +34954,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1747906213821754191, guid: e3fb9c845ebd18e4888af5d624679b3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fb9c845ebd18e4888af5d624679b3c, type: 3}
 --- !u!4 &7626168628335987575 stripped
@@ -35184,6 +35279,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPotion (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6815178513782124842, guid: 4806471984b3d8146b3217ec28a6bedb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6815178513782124843, guid: 4806471984b3d8146b3217ec28a6bedb,
         type: 3}
       propertyPath: m_LocalPosition.x
