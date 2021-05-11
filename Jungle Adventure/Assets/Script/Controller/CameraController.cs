@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
@@ -25,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if(player == null)
+        if (player == null)
         {
             FindPlayer(isLeft);
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
 public class RecordController
 {
@@ -26,7 +24,7 @@ public class RecordController
     {
         recordModel.SendRecordPlayer();
     }
-    
+
     public void SendRecordView(RecordPlayer recordPlayer)
     {
         recordView.LoadRecords(recordPlayer);

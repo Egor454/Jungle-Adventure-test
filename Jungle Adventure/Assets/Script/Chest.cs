@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class Chest : MonoBehaviour
         {
             anim.SetBool("Open", true);
             boxCest.enabled = false;
-            
+
         }
     }
 

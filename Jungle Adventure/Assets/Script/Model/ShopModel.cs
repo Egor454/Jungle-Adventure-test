@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
 public class ShopModel
 {
@@ -14,7 +11,7 @@ public class ShopModel
     #region UnityAction
 
     public event UnityAction<Skins> SendSkin;
-    public event UnityAction<int,int> SendDataskinWasBuy;
+    public event UnityAction<int, int> SendDataskinWasBuy;
 
     #endregion UnityAction
 
@@ -32,9 +29,9 @@ public class ShopModel
 
     public void SendIdSkin(string nameSkin)
     {
-        for(int i = 0; i <skin.skin.Length; i++)
+        for (int i = 0; i < skin.skin.Length; i++)
         {
-            if(nameSkin == skin.skin[i].Name)
+            if (nameSkin == skin.skin[i].Name)
             {
                 SendDataskinWasBuy?.Invoke(skin.skin[i].id, skin.skin[i].Cost);
             }

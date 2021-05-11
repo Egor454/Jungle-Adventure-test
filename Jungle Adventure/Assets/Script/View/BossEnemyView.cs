@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 
@@ -46,9 +44,9 @@ public class BossEnemyView : MonoBehaviour
             float x = target.position.x;
             float y = transforms.position.y;
             transforms.position = new Vector2(x, y);
-            
+
         }
-        else if(timeLeft < 0 && !moveBackposition)
+        else if (timeLeft < 0 && !moveBackposition)
         {
             if (attacked)
             {
@@ -74,14 +72,14 @@ public class BossEnemyView : MonoBehaviour
                 attacked = false;
                 BossBackPosition?.Invoke();
             }
-            if(transforms.position.y == homeY)
+            if (transforms.position.y == homeY)
             {
                 moveBackposition = false;
                 timeLeft = 5f;
                 timeWait = 2f;
             }
         }
-        
+
     }
     private void HeroAttack()
     {

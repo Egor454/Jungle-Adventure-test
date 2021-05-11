@@ -1,22 +1,21 @@
-﻿using UnityEditor;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 using UnityEngine;
 
-public class PlayerModel 
+public class PlayerModel
 {
     #region Private Fields
 
     private float playerMove;
     private int health = 3;
-    private  float horizontalSpeed = 0.1f;
+    private float horizontalSpeed = 0.1f;
 
     #endregion Private Fields
 
     #region UnityAction
 
-    public event UnityAction <float> ChangedPositionModel;
+    public event UnityAction<float> ChangedPositionModel;
     public event UnityAction<int> GetHealth;
-    public event UnityAction<int,Collider2D> UpgradeTheAmountOfHealth;
+    public event UnityAction<int, Collider2D> UpgradeTheAmountOfHealth;
     public event UnityAction PlayerDeath;
 
     #endregion UnityAction
@@ -25,11 +24,11 @@ public class PlayerModel
 
     public void ChangePosition(float moveInput)
     {
-        if(moveInput == 1)
+        if (moveInput == 1)
         {
             playerMove = horizontalSpeed;
         }
-        else if(moveInput == -1)
+        else if (moveInput == -1)
         {
             playerMove = -horizontalSpeed;
         }
@@ -39,7 +38,7 @@ public class PlayerModel
     public void ChangeHealth(int damage)
     {
         health -= damage;
-        if(health == 0)
+        if (health == 0)
         {
             PlayerDeath?.Invoke();
         }

@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviourSingleton<AudioManager>
 {
-    [SerializeField]  private AudioSource audioSourceForFonMusic;
+    [SerializeField] private AudioSource audioSourceForFonMusic;
     [SerializeField] private AudioSource audioSourceForButton;
     [SerializeField] AudioClip musicMainMenu;
     [SerializeField] AudioClip musicLevel1;
@@ -36,7 +33,7 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     }
     void Update()
     {
-        
+
     }
     public void FonMusic(int sceneIndex)
     {
@@ -69,7 +66,7 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
                 audioSourceForFonMusic.Play();
             }
         }
-       
+
     }
     public void ChangeMusicSettings()
     {

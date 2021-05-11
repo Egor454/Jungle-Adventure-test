@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-public class FlyingEnemyModel 
+public class FlyingEnemyModel
 {
     #region Private Fields
 

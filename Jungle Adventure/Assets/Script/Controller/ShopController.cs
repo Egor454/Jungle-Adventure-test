@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class ShopController
 {
     #region Private Fields
@@ -41,7 +38,7 @@ public class ShopController
         shopModel.SendIdSkin(nameSkin);
     }
 
-    public void BuySkinView(int idSkin,int costSkin)
+    public void BuySkinView(int idSkin, int costSkin)
     {
         shopView.SendDataAboutBuySkin(costSkin, idSkin);
     }

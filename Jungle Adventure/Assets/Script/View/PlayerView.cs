@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using System.Collections;
 
 public class PlayerView : MonoBehaviour
 {
@@ -80,17 +78,8 @@ public class PlayerView : MonoBehaviour
         {
             InvulnerabilityTimer();
         }
-        if (Input.GetKey(KeyCode.RightArrow) || (Input.GetKey(KeyCode.LeftArrow)))
+        if (moveInput == 1)
         {
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            moveInput = 1;
             if (soundSettings)
             {
                 if (isGrounded == true)
@@ -106,9 +95,8 @@ public class PlayerView : MonoBehaviour
             }
             ChangedPosition?.Invoke(moveInput);
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (moveInput == -1)
         {
-            moveInput = -1;
             if (soundSettings)
             {
                 if (isGrounded == true)
@@ -122,47 +110,30 @@ public class PlayerView : MonoBehaviour
                     }
                 }
             }
-              
             ChangedPosition?.Invoke(moveInput);
         }
         if (facingRight == false && moveInput == 1)
         {
             Flip();
-        }else if (facingRight == true && moveInput == -1)
+        }
+        else if (facingRight == true && moveInput == -1)
         {
             Flip();
         }
-       
+
     }
     private void Update()
     {
 
-        if (isGrounded == true)
-        {
-            extraJump = extraJumpValue;
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && extraJump > 0)
-        {
-            rb.velocity = Vector2.up * jumpForce;
-            extraJump--;
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && extraJump == 0 && isGrounded == true)
-        {
-            rb.velocity = Vector2.up * jumpForce;
-            if (soundSettings)
-                audioSource.PlayOneShot(jumpMusic);
-            anim.SetBool("Ground", false);
-        }
     }
 
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3  Scaler = transforms.localScale;
-        if(facingRight == false)
+        Vector3 Scaler = transforms.localScale;
+        if (facingRight == false)
         {
-            if(gameObject.name == "HeavyBandit(Clone)" || gameObject.name == "LightBandit(Clone)" || gameObject.name == "LightBanditNight(Clone)" || gameObject.name == "HeavyBanditNight(Clone)")
+            if (gameObject.name == "HeavyBandit(Clone)" || gameObject.name == "LightBandit(Clone)" || gameObject.name == "LightBanditNight(Clone)" || gameObject.name == "HeavyBanditNight(Clone)")
             {
                 Scaler.x = (float)-2;
             }
@@ -183,12 +154,12 @@ public class PlayerView : MonoBehaviour
             }
         }
         transforms.localScale = Scaler;
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
             if (isEnemy)
             {
@@ -211,7 +182,7 @@ public class PlayerView : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Coin")
+        if (collision.gameObject.tag == "Coin")
         {
             if (soundSettings)
                 audioSource.PlayOneShot(getCoinMusic);
@@ -258,6 +229,46 @@ public class PlayerView : MonoBehaviour
         gameObject.layer = 10;
         sprite.color = new Color(1f, 1f, 1f, 0.5f);
         invulnerability = true;
+    }
+
+    public void OnLeftButtonDown()
+    {
+        moveInput = -1;
+        anim.SetBool("isRunning", true);
+    }
+
+    public void OnRightButtonDown()
+    {
+        moveInput = 1;
+        anim.SetBool("isRunning", true);
+    }
+
+    public void OnButtonUp()
+    {
+        anim.SetBool("isRunning", false);
+        moveInput = 0;
+    }
+
+    public void ButtonJump()
+    {
+
+        if (isGrounded == true)
+        {
+            extraJump = extraJumpValue;
+        }
+        if (extraJump > 0)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            extraJump--;
+
+        }
+        else if (extraJump == 0 && isGrounded == true)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            if (soundSettings)
+                audioSource.PlayOneShot(jumpMusic);
+            anim.SetBool("Ground", false);
+        }
     }
 
     #endregion Public Methods

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
 
 public class GameController : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text dieScore_text;
     [SerializeField] private Text dieTime_text;
 
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera cameraForPlayer;
 
     [SerializeField] private GameObject uiGame;
     [SerializeField] private GameObject massageBoxGameOver;
@@ -91,13 +90,13 @@ public class GameController : MonoBehaviour
         {
             groundEnemyModel = new GroundEnemyModel();
             var groundEnemyView = objet.GetComponent<GroundEnemyView>();
-            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel,this);
+            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel, this);
         }
         foreach (GameObject objet in flyingEnemyPrefab)
         {
             flyingEnemyModel = new FlyingEnemyModel();
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
-            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel,this);
+            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel, this);
         }
         audioSource = gameObject.GetComponent<AudioSource>();
         if (sceneIndex == 4)
@@ -111,14 +110,14 @@ public class GameController : MonoBehaviour
             }
             bossEnemyModel = new BossEnemyModel();
             var bossEnemyView = bossPrefab.GetComponent<BossEnemyView>();
-            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel,this, playerPrefab);
+            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel, this, playerPrefab);
             var lightPlayer = playerPrefab.transform.Find("Sprite Light 2D");
             lightPlayer.gameObject.SetActive(false);
 
         }
         soundSettings = System.Convert.ToBoolean(PlayerPrefs.GetString("SoundSettings"));
         if (soundSettings)
-        audioSource.PlayOneShot(portalMusic);
+            audioSource.PlayOneShot(portalMusic);
         AudioManager.Instance.FonMusic(sceneIndex);
     }
     private void Update()
@@ -211,7 +210,7 @@ public class GameController : MonoBehaviour
     }
     public void GameOver()
     {
-        camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
+        cameraForPlayer.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
         uiGame.SetActive(false);
         massageBoxGameOver.SetActive(true);
 
@@ -223,7 +222,7 @@ public class GameController : MonoBehaviour
     {
         if (soundSettings)
             audioSource.PlayOneShot(portalMusic);
-        camera.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
+        cameraForPlayer.transform.position = new Vector2(transform.position.x + 100.5f, transform.position.y + 50.5f);
         uiGame.SetActive(false);
         massageBoxCompliteLevel.SetActive(true);
 
@@ -231,7 +230,7 @@ public class GameController : MonoBehaviour
         endLevelCoin_text.text = coin.ToString();
         endLevelScore_text.text = score.ToString();
         string playerName = PlayerPrefs.GetString("PlayerRegister");
-        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex , playerName));
+        StartCoroutine(DbManager.Instance.SendLevelCompleted("Level" + sceneIndex, playerName));
         StartCoroutine(DbManager.Instance.UpdateMoneyPlayer(playerName, coin));
     }
     public void RestartLevel()
@@ -286,6 +285,26 @@ public class GameController : MonoBehaviour
             playerController.ChangeHealthModel(damage);
         }
         enemyWasKill = false;
+    }
+
+    public void RightClick()
+    {
+        playerController.DownRightButton();
+    }
+
+    public void LeftClick()
+    {
+        playerController.DownLeftButton();
+    }
+
+    public void UpClick()
+    {
+        playerController.UpButton();
+    }
+
+    public void JumpClick()
+    {
+        playerController.JumpButton();
     }
 
     #endregion Public Methods

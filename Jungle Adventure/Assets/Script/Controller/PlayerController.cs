@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController 
+public class PlayerController
 {
     #region Private Fields
 
@@ -12,7 +12,7 @@ public class PlayerController
 
     #region Public Methods
 
-    public PlayerController(PlayerView view, PlayerModel model,GameController games)
+    public PlayerController(PlayerView view, PlayerModel model, GameController games)
     {
         this.playerView = view;
         this.playerModel = model;
@@ -39,6 +39,26 @@ public class PlayerController
     public void ChangeHealthModel(int damage)
     {
         playerModel.ChangeHealth(damage);
+    }
+
+    public void DownRightButton()
+    {
+        playerView.OnRightButtonDown();
+    }
+
+    public void DownLeftButton()
+    {
+        playerView.OnLeftButtonDown();
+    }
+
+    public void UpButton()
+    {
+        playerView.OnButtonUp();
+    }
+
+    public void JumpButton()
+    {
+        playerView.ButtonJump();
     }
 
     #endregion Public Methods
@@ -73,7 +93,7 @@ public class PlayerController
 
     private void HealPlayerModel(Collider2D collision)
     {
-         playerModel.GetHealthPotion(collision);
+        playerModel.GetHealthPotion(collision);
     }
 
     private void UpgradeTheAmountOfHealthView(int hp, Collider2D collision)

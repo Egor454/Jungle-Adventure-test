@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
 public class GroundEnemyModel
 {

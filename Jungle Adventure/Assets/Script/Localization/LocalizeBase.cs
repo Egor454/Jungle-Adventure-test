@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Script.Localization
 {
@@ -48,11 +46,11 @@ namespace Script.Localization
             Locale.PlayerLanguage = language;
             Localize[] allTexts = GameObject.FindObjectsOfType<Localize>();
             LocalizeTM[] allTextsTM = GameObject.FindObjectsOfType<LocalizeTM>();
-            for (int i = 0; i< allTexts.Length; i++)
+            for (int i = 0; i < allTexts.Length; i++)
             {
                 allTexts[i].UpdateLocal();
             }
-            for (int i = 0; i< allTextsTM.Length; i++)
+            for (int i = 0; i < allTextsTM.Length; i++)
             {
                 allTextsTM[i].UpdateLocal();
             }

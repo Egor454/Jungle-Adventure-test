@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Script.Localization
 {
-    public static class Locale 
+    public static class Locale
     {
         #region Fields
 
@@ -20,30 +19,30 @@ namespace Script.Localization
 
         #region Public Methods
 
-        public static string CurrentLanguage 
+        public static string CurrentLanguage
         {
             get { return currentLanguage; }
             set
             {
-                if(value != null && value.Trim() != string.Empty)
+                if (value != null && value.Trim() != string.Empty)
                 {
                     currentLanguage = value;
                     currentLocalizationText = Resources.Load(STR_LOCALIZATION_PREFIX + currentLanguage, typeof(TextAsset)) as TextAsset;
-                    if(currentLocalizationText == null)
+                    if (currentLocalizationText == null)
                     {
                         Debug.LogWarningFormat("Missing locale '{0}', loading Russian ", CurrentLanguage);
                         currentLanguage = SystemLanguage.Russian.ToString();
                         currentLocalizationText = Resources.Load(STR_LOCALIZATION_PREFIX + currentLanguage, typeof(TextAsset)) as TextAsset;
                     }
-                    if(currentLocalizationText != null)
+                    if (currentLocalizationText != null)
                     {
                         currentLanguageFileHasBeFound = true;
                         string[] lines = currentLocalizationText.text.Split(new string[] { "\r\n", "\n\r", "\n" }, System.StringSplitOptions.RemoveEmptyEntries);
                         CurrentLanguageStrings.Clear();
-                        for(int i = 0;i < lines.Length; i++)
+                        for (int i = 0; i < lines.Length; i++)
                         {
                             string[] pairs = lines[i].Split(new char[] { '\t', '=' }, 2);
-                            if(pairs.Length == 2)
+                            if (pairs.Length == 2)
                             {
                                 CurrentLanguageStrings.Add(pairs[0].Trim(), pairs[1].Trim());
                             }
@@ -51,13 +50,13 @@ namespace Script.Localization
                     }
                     else
                     {
-                        Debug.LogErrorFormat("Local language '{0}' not found!", currentLanguage); 
+                        Debug.LogErrorFormat("Local language '{0}' not found!", currentLanguage);
                     }
                 }
             }
         }
 
-        public static bool CurrentLanguageHasBeenSet 
+        public static bool CurrentLanguageHasBeenSet
         {
             get
             {

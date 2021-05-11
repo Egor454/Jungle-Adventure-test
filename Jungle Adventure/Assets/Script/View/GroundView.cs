@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class GroundView : MonoBehaviour
@@ -50,11 +48,11 @@ public class GroundView : MonoBehaviour
     }
     public void GetHealth(int hp)
     {
-        if(hp == 2)
+        if (hp == 2)
         {
             sprite.sprite = (Sprite)Resources.Load("Image/ImageBossFight/HeartGround" + hp, typeof(Sprite));
         }
-        else if(hp == 1)
+        else if (hp == 1)
         {
             sprite.sprite = (Sprite)Resources.Load("Image/ImageBossFight/HeartGround" + hp, typeof(Sprite));
         }

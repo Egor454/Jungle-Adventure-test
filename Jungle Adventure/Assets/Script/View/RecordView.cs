@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
@@ -44,10 +42,10 @@ public class RecordView : MonoBehaviour
     public void LoadRecords(RecordPlayer recordPlayer)
     {
         int i = 0;
-        foreach(var record in recordPlayer.recordPlayer)
+        foreach (var record in recordPlayer.recordPlayer)
         {
             i++;
-            if(i > 6)
+            if (i > 6)
             {
                 break;
             }

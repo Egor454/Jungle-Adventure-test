@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Script.Localization;
@@ -96,7 +94,7 @@ public class MenuSceneManager : MonoBehaviour
             else if (Locale.PlayerLanguage == SystemLanguage.Russian)
                 offOnSound.text = "Выкл";
         }
-        if(Locale.PlayerLanguage == SystemLanguage.English)
+        if (Locale.PlayerLanguage == SystemLanguage.English)
             nameLanguage.text = "English";
         else if (Locale.PlayerLanguage == SystemLanguage.Russian)
             nameLanguage.text = "Русский";
@@ -110,9 +108,9 @@ public class MenuSceneManager : MonoBehaviour
     {
         levelSelection.SetActive(true);
         menu.SetActive(false);
-        if(Locale.currentLanguageHasBeenSet == true)
+        if (Locale.currentLanguageHasBeenSet == true)
         {
-            if(Locale.PlayerLanguage == SystemLanguage.English)
+            if (Locale.PlayerLanguage == SystemLanguage.English)
                 Localize.SetCurrentLanguage(SystemLanguage.English);
             else if (Locale.PlayerLanguage == SystemLanguage.Russian)
                 Localize.SetCurrentLanguage(SystemLanguage.Russian);
@@ -122,7 +120,7 @@ public class MenuSceneManager : MonoBehaviour
         {
             if (DbManager.Instance.Level[i] == "1")
             {
-                if( i == DbManager.Instance.Level.Count - 1)
+                if (i == DbManager.Instance.Level.Count - 1)
                 {
                     break;
                 }
@@ -221,7 +219,7 @@ public class MenuSceneManager : MonoBehaviour
     }
     public void LeftArrowMusic()
     {
-        if(offOnMusic.text != "Вкл" || offOnMusic.text != "On")
+        if (offOnMusic.text != "Вкл" || offOnMusic.text != "On")
         {
             if (Locale.PlayerLanguage == SystemLanguage.English)
             {
@@ -274,7 +272,7 @@ public class MenuSceneManager : MonoBehaviour
     {
         if (offOnSound.text != "Выкл" || offOnSound.text != "Off")
         {
-            if(Locale.PlayerLanguage == SystemLanguage.English)
+            if (Locale.PlayerLanguage == SystemLanguage.English)
             {
                 offOnSound.text = "Off";
             }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
@@ -50,9 +48,9 @@ public class ShopView : MonoBehaviour
 
     public void LoadData(Skins skin)
     {
-        for (int i = 0; i < skinName.Length;i++)
+        for (int i = 0; i < skinName.Length; i++)
         {
-            for ( int j = 0; j < skinName.Length; j++)
+            for (int j = 0; j < skinName.Length; j++)
             {
                 string name = skinName[i].name.ToString();
                 if (name == skin.skin[j].Name)
@@ -82,9 +80,9 @@ public class ShopView : MonoBehaviour
 
         if (PlayerPrefs.HasKey("SelectNowSkin"))
         {
-            for(int i = 0; i < selectSkin.Length; i++)
+            for (int i = 0; i < selectSkin.Length; i++)
             {
-                if(PlayerPrefs.GetString("SelectNowSkin") == skinName[i].name)
+                if (PlayerPrefs.GetString("SelectNowSkin") == skinName[i].name)
                 {
                     selectSkin[i].interactable = false;
                     skinWasSelect[i].gameObject.SetActive(true);
@@ -105,9 +103,9 @@ public class ShopView : MonoBehaviour
 
     public void BuySkin(string nameSkin)
     {
-        for(int i = 0; i < buySkin.Length; i++)
-        { 
-            if(nameSkin == skinName[i].text)
+        for (int i = 0; i < buySkin.Length; i++)
+        {
+            if (nameSkin == skinName[i].text)
             {
                 buySkin[i].gameObject.SetActive(false);
                 selectSkin[i].gameObject.SetActive(true);
@@ -117,18 +115,18 @@ public class ShopView : MonoBehaviour
         AudioManager.Instance.ButtonClick();
     }
 
-    public void SendDataAboutBuySkin(int costSkins,int idSkin)
+    public void SendDataAboutBuySkin(int costSkins, int idSkin)
     {
-        StartCoroutine(DbManager.Instance.BuySkin(PlayerPrefs.GetString("PlayerRegister"),idSkin));
+        StartCoroutine(DbManager.Instance.BuySkin(PlayerPrefs.GetString("PlayerRegister"), idSkin));
         StartCoroutine(DbManager.Instance.ChangeMoneyPlayer(PlayerPrefs.GetString("PlayerRegister"), costSkins));
     }
 
     public void SelectSkin(string nameSkin)
     {
         AudioManager.Instance.ButtonClick();
-        for (int i = 0; i< selectSkin.Length; i++)
+        for (int i = 0; i < selectSkin.Length; i++)
         {
-            if(nameSkin == skinName[i].name)
+            if (nameSkin == skinName[i].name)
             {
                 selectSkin[i].interactable = false;
                 skinWasSelect[i].gameObject.SetActive(true);
