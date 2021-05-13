@@ -307,6 +307,11 @@ public class GameController : MonoBehaviour
         playerController.JumpButton();
     }
 
+    public void GoHome()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     #endregion Public Methods
 
 }

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1238,6 +1238,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 520028060662747857, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1067437687}
+    - target: {fileID: 520028060662747857, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 520028060662747857, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 599611244633318235, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -1277,6 +1292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CashEndLevel_value
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824871342688238854, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -212.20001
       objectReference: {fileID: 0}
     - target: {fileID: 1889510999959672360, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
@@ -1348,6 +1368,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.14990234
       objectReference: {fileID: 0}
+    - target: {fileID: 4106544752296493052, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 510.91003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106544752296493052, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -212.20001
+      objectReference: {fileID: 0}
     - target: {fileID: 4193356708619314637, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
@@ -1402,6 +1432,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BackMainScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553220860469072354, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -486.09998
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553220860469072354, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -212.20001
       objectReference: {fileID: 0}
     - target: {fileID: 5783255915300856360, guid: bfd8f5bd6ddc1ab4dad9f8ec18402349,
         type: 3}
