@@ -1,6 +1,6 @@
 ﻿
 
-public class RecordController
+public class RecordPresenter
 {
     #region Private Fields
 
@@ -11,7 +11,7 @@ public class RecordController
 
     #region Public Methods
 
-    public RecordController(RecordView view, RecordModel model)
+    public RecordPresenter(RecordView view, RecordModel model)
     {
         this.recordView = view;
         this.recordModel = model;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController
+public class PlayerPresenter
 {
     #region Private Fields
 
@@ -12,7 +12,7 @@ public class PlayerController
 
     #region Public Methods
 
-    public PlayerController(PlayerView view, PlayerModel model, GameController games)
+    public PlayerPresenter(PlayerView view, PlayerModel model, GameController games)
     {
         this.playerView = view;
         this.playerModel = model;

@@ -1,5 +1,5 @@
 ﻿
-public class GroundController
+public class GroundPresenter
 {
     #region Private Fields
 
@@ -10,7 +10,7 @@ public class GroundController
 
     #region Public Methods
 
-    public GroundController(GroundView groundViews, GroundModel model)
+    public GroundPresenter(GroundView groundViews, GroundModel model)
     {
         this.groundView = groundViews;
         this.groundModel = model;

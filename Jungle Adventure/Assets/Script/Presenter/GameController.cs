@@ -44,16 +44,16 @@ public class GameController : MonoBehaviour
     #endregion SerializeField
 
     #region Private Fields
-    private PlayerController playerController;
+    private PlayerPresenter playerPresenter;
     private PlayerModel playerModel;
     private GroundEnemyModel groundEnemyModel;
-    private GroundEnemyController groundEnemyController;
+    private GroundEnemyPresenter groundEnemyPresenter;
     private FlyingEnemyModel flyingEnemyModel;
-    private FlyingEnemyController flyingEnemyController;
-    private GroundController groundController;
+    private FlyingEnemyPresenter flyingEnemyPresenter;
+    private GroundPresenter groundPresenter;
     private GroundModel groundModel;
     private GroundView groundView;
-    private BossEnemyController bossEnemyController;
+    private BossEnemyPresenter bossEnemyPresenter;
     private BossEnemyModel bossEnemyModel;
 
     private int coin;
@@ -85,18 +85,18 @@ public class GameController : MonoBehaviour
         playerModel = new PlayerModel();
         playerPrefab.transform.position = spawnPlayer.transform.position;
         var playerView = playerPrefab.GetComponent<PlayerView>();
-        playerController = new PlayerController(playerView, playerModel, this);
+        playerPresenter = new PlayerPresenter(playerView, playerModel, this);
         foreach (GameObject objet in groundEnemyPrefab)
         {
             groundEnemyModel = new GroundEnemyModel();
             var groundEnemyView = objet.GetComponent<GroundEnemyView>();
-            groundEnemyController = new GroundEnemyController(groundEnemyView, groundEnemyModel, this);
+            groundEnemyPresenter = new GroundEnemyPresenter(groundEnemyView, groundEnemyModel, this);
         }
         foreach (GameObject objet in flyingEnemyPrefab)
         {
             flyingEnemyModel = new FlyingEnemyModel();
             var flyingEnemyView = objet.GetComponent<FlyingEnemyView>();
-            flyingEnemyController = new FlyingEnemyController(flyingEnemyView, flyingEnemyModel, this);
+            flyingEnemyPresenter = new FlyingEnemyPresenter(flyingEnemyView, flyingEnemyModel, this);
         }
         audioSource = gameObject.GetComponent<AudioSource>();
         if (sceneIndex == 4)
@@ -105,12 +105,12 @@ public class GameController : MonoBehaviour
             {
                 groundModel = new GroundModel();
                 groundView = objet.GetComponent<GroundView>();
-                groundController = new GroundController(groundView, groundModel);
+                groundPresenter = new GroundPresenter(groundView, groundModel);
                 groundView.Iniinitialization(this);
             }
             bossEnemyModel = new BossEnemyModel();
             var bossEnemyView = bossPrefab.GetComponent<BossEnemyView>();
-            bossEnemyController = new BossEnemyController(bossEnemyView, bossEnemyModel, this, playerPrefab);
+            bossEnemyPresenter = new BossEnemyPresenter(bossEnemyView, bossEnemyModel, this, playerPrefab);
             var lightPlayer = playerPrefab.transform.Find("Sprite Light 2D");
             lightPlayer.gameObject.SetActive(false);
 
@@ -282,29 +282,29 @@ public class GameController : MonoBehaviour
     {
         if (!enemyWasKill)
         {
-            playerController.ChangeHealthModel(damage);
+            playerPresenter.ChangeHealthModel(damage);
         }
         enemyWasKill = false;
     }
 
     public void RightClick()
     {
-        playerController.DownRightButton();
+        playerPresenter.DownRightButton();
     }
 
     public void LeftClick()
     {
-        playerController.DownLeftButton();
+        playerPresenter.DownLeftButton();
     }
 
     public void UpClick()
     {
-        playerController.UpButton();
+        playerPresenter.UpButton();
     }
 
     public void JumpClick()
     {
-        playerController.JumpButton();
+        playerPresenter.JumpButton();
     }
 
     public void GoHome()

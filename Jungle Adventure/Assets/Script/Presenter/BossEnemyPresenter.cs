@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BossEnemyController
+public class BossEnemyPresenter
 {
     #region Private Fields
 
@@ -12,7 +12,7 @@ public class BossEnemyController
 
     #region Public Methods
 
-    public BossEnemyController(BossEnemyView bossEnemyViews, BossEnemyModel bossEnemyModels, GameController game, GameObject player)
+    public BossEnemyPresenter(BossEnemyView bossEnemyViews, BossEnemyModel bossEnemyModels, GameController game, GameObject player)
     {
 
         this.bossEnemyView = bossEnemyViews;

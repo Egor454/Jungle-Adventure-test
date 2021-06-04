@@ -1,5 +1,5 @@
 ﻿
-public class FlyingEnemyController
+public class FlyingEnemyPresenter
 {
     #region Private Fields
 
@@ -11,7 +11,7 @@ public class FlyingEnemyController
 
     #region Public Methods
 
-    public FlyingEnemyController(FlyingEnemyView flyingEnemyViews, FlyingEnemyModel model, GameController game)
+    public FlyingEnemyPresenter(FlyingEnemyView flyingEnemyViews, FlyingEnemyModel model, GameController game)
     {
 
         this.flyingEnemyView = flyingEnemyViews;

@@ -1,5 +1,5 @@
 ﻿
-public class GroundEnemyController
+public class GroundEnemyPresenter
 {
     #region Private Fields
 
@@ -11,7 +11,7 @@ public class GroundEnemyController
 
     #region Public Methods
 
-    public GroundEnemyController(GroundEnemyView groundEnemyView, GroundEnemyModel model, GameController game)
+    public GroundEnemyPresenter(GroundEnemyView groundEnemyView, GroundEnemyModel model, GameController game)
     {
         this.groundEnemyView = groundEnemyView;
         this.enemyModel = model;

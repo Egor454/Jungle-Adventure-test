@@ -1,5 +1,5 @@
 ﻿
-public class ShopController
+public class ShopPresenter
 {
     #region Private Fields
 
@@ -10,7 +10,7 @@ public class ShopController
 
     #region Public Methods
 
-    public ShopController(ShopView view, ShopModel model)
+    public ShopPresenter(ShopView view, ShopModel model)
     {
         this.shopView = view;
         this.shopModel = model;

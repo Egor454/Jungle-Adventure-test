@@ -32,9 +32,9 @@ public class MenuSceneManager : MonoBehaviour
     int i;
 
     private ShopModel shopModel;
-    private ShopController shopController;
+    private ShopPresenter shopPresenter;
     private RecordModel recordModel;
-    private RecordController recordController;
+    private RecordPresenter recordPresenter;
 
     #endregion Private Fields
 
@@ -180,7 +180,7 @@ public class MenuSceneManager : MonoBehaviour
         }
         shopModel = new ShopModel();
         var shopView = shop.GetComponent<ShopView>();
-        shopController = new ShopController(shopView, shopModel);
+        shopPresenter = new ShopPresenter(shopView, shopModel);
         AudioManager.Instance.ButtonClick();
 
     }
@@ -197,7 +197,7 @@ public class MenuSceneManager : MonoBehaviour
         }
         recordModel = new RecordModel();
         var recordView = record.GetComponent<RecordView>();
-        recordController = new RecordController(recordView, recordModel);
+        recordPresenter = new RecordPresenter(recordView, recordModel);
         AudioManager.Instance.ButtonClick();
     }
     public void GetAllSkin()
